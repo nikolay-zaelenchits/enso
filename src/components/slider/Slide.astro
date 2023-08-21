@@ -1,0 +1,39 @@
+---
+interface Props {
+    title: string;
+    txt: string;
+    // color?: string;
+    // bgColor?: string;
+    imgUrl?: string;
+}
+
+const {title, txt, color = 'black', bgColor = 'white', imgUrl} = Astro.props;
+---
+
+<!--<div class="slide-wr" style={`color: ${color};background-color: ${bgColor}`}>-->
+<div class="slide-wr">
+    <div class="slide">
+        <div class="slide-txt-box">
+            <div class="slide-title">{title}</div>
+            <div class="slide-txt">{txt}</div>
+        </div>
+
+
+        {imgUrl ?
+                <div class="slide-img-box" style={`background-image: url(${imgUrl})`}>
+                    <slot/>
+                </div>
+            :
+                <div class="slide-img-box">
+                    <slot/>
+                </div>
+
+        }
+    </div>
+</div>
+
+<style lang="scss">
+    .slide-img-box {
+
+    }
+</style>

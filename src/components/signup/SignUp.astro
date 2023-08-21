@@ -1,0 +1,132 @@
+---
+import Button from "../button/Button.astro";
+import Input from "../input/Input.astro";
+---
+
+<div class="signup">
+    <div class="signup-content">
+        <div class="signup-social">
+            <div class="signup-social-title">SIGN UP</div>
+            <div class="signup-social-txt">Sign up to the ENSO Memo to get our latest news and updates, keeping you in the loop about our activities, events and latest innovations. For more frequent updates please follow us on social media.</div>
+            <div class="signup-social-icons">
+                <div class="signup-social-icon signup-social-icon-f"></div>
+                <div class="signup-social-icon signup-social-icon-x"></div>
+            </div>
+        </div>
+        <div class="signup-form">
+            <Input label="EMAIL"/>
+            <Input label="REGION"/>
+            <!--<div class="signup-form-field signup-field-email">EMAIL</div>-->
+            <!--<div class="signup-form-field signup-field-region">REGION</div>-->
+            <div class="signup-btn-row">
+                <Button>Contact Us</Button>
+            </div>
+            <div class="signup-form-txt">
+                By signing up to this ENSO MEMO you agree to our <a href="#">terms &amp; conditions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style lang="scss" is:global>
+    .signup {
+        padding-left: 90px;
+        padding-right: 90px;
+
+        padding-top: 120px;
+        padding-bottom: 120px;
+
+        background-color: #deeaf1;
+
+        .signup-content {
+            display: flex;
+            align-items: center;
+
+            & > div {
+                width: 50%;
+                padding-right: 200px;
+            }
+
+            .signup-social {
+                & > div {
+                    margin-top: 25px;
+                    margin-bottom: 25px;
+                }
+
+                .signup-social-title {
+                    font-size: 36px;
+                    font-weight: bold;
+                }
+
+                .signup-social-txt {
+                    font-size: 14px;
+                }
+
+                .signup-social-icons {
+                    display: flex;
+
+                    .signup-social-icon {
+                        color: white;
+                        //background-color: black;
+                        cursor: pointer;
+
+                        font-size: 30px;
+                        line-height: 57px;
+                        text-align: center;
+
+                        height: 60px;
+                        width: 60px;
+                        border-radius: 50%;
+
+                        margin-right: 10px;
+
+                        background-position: center center;
+                        background-size: cover;
+
+                        &.signup-social-icon-f {
+                            background-image: url("/img/facebook1.png");
+                        }
+
+                        &.signup-social-icon-x {
+                            background-image: url("/img/x.png");
+                        }
+                    }
+                }
+            }
+
+            .signup-form {
+                display: flex;
+                flex-direction: column;
+
+                > div{
+                    margin: 20px 0;
+                }
+
+                .signup-form-field {
+                    background-color: white;
+                    font-weight: bold;
+                    padding: 20px;
+                    margin-top: 20px;
+                    font-size: 13px;
+                }
+
+                .signup-btn-row {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    display: flex;
+                }
+
+                .signup-form-txt {
+                    font-size: 14px;
+
+                    a {
+                        &,
+                        &:visited {
+                            color: black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>

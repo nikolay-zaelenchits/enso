@@ -1,0 +1,127 @@
+---
+import Button from "../button/Button.astro";
+---
+
+<div class="hero">
+    <div class="hero-bg-box"></div>
+    <div id="hero-video-box" class="hero-video-box">
+        <div class="hero-iframe-wr">
+            <iframe id="hero-video-frame" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="__01_loop_introvideo _DESKTOP 16-9" data-ready="true" src="https://player.vimeo.com/video/320459562?title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;autoplay=1&amp;loop=1&amp;background=1&amp;app_id=122963"></iframe>
+        </div>
+    </div>
+
+    <div class="hero-txt-box">
+        <div class="hero-txt-row">SUSTAINABLE TYRES FOR ELECTRICAL VEHICLES</div>
+        <div class="hero-btn-row">
+            <Button>Watch Video</Button>
+
+            <Button btnType="white">Contact Us</Button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const videoBox = document.getElementById('hero-video-box');
+    const videoFrame = document.getElementById('hero-video-frame');
+
+    videoFrame.onload = function () {
+        setTimeout(() => {
+            videoBox.classList.add('play');
+        }, 1500);
+    };
+
+</script>
+
+<style lang="scss" is:global>
+    .hero {
+        height: 90vh;
+        min-height: 440px;
+
+        position: relative;
+
+        .hero-bg-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            //background-image: url("/img/hero-bg.png");
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .hero-video-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            //top: 0;
+            //bottom: 0;
+            left: 0;
+            right: 0;
+
+            //width: 500px;
+            //height: 500px;
+            margin: auto;
+
+            //padding-bottom: 100%;
+            box-sizing: border-box;
+
+            overflow: hidden;
+
+            opacity: 0;
+            transition: opacity 2s;
+
+            &.play {
+                opacity: 1;
+            }
+
+            .hero-iframe-wr{
+                position: relative;
+                //border: 2px solid green;
+
+                width: 100%;
+                //height: 300px;
+                padding-bottom: 56.25%;
+            }
+
+            iframe {
+                position: absolute;
+                min-width: 100%;
+                min-height: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translatex(-50%) translatey(-50%);
+            }
+
+
+        }
+
+        .hero-txt-box {
+            padding: 40px 90px 40px 70px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+
+            position: absolute;
+            left: 90px;
+            top: 50%;
+            transform: translatey(-50%);
+            width: 520px;
+
+            .hero-txt-row {
+                font-size: 36px;
+                font-weight: bold;
+                line-height: 1.4;
+                margin-bottom: 40px;
+            }
+
+            .hero-btn-row {
+                display: flex;
+
+                .btn {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+</style>

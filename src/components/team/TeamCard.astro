@@ -1,0 +1,53 @@
+---
+import Button from "../button/Button.astro";
+---
+
+<div class="team-card">
+    <div class="team-card-img"></div>
+    <div class="team-card-title">Gunnlaugur Erlendsson</div>
+    <div class="team-card-sub-title">Founder & CEO</div>
+    <div class="team-card-btn-row">
+        <Button>View LinkedIn</Button>
+    </div>
+</div>
+
+<style lang="scss" is:global>
+    .team-card {
+        background-color: white;
+        padding: 35px 90px 25px;
+        flex-basis: min-content;
+
+        & > div {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .team-card-img {
+            width: 200px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 50%;
+            background-image: url("/img/teammate1.jpg");
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .team-card-title {
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 1.4;
+
+            text-align: center;
+        }
+
+        .team-card-sub-title {
+            text-align: center;
+        }
+
+        .team-card-btn-row {
+            display: flex;
+            justify-content: center;
+        }
+    }
+</style>
