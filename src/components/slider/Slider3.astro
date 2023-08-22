@@ -29,10 +29,10 @@ import Slide from "./Slide.astro";
 
 
         <div class="slider-controls">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div data-idx="0"></div>
+            <div data-idx="1"></div>
+            <div data-idx="2"></div>
+            <div data-idx="3"></div>
         </div>
 
     </div>
@@ -53,7 +53,7 @@ import Slide from "./Slide.astro";
         const slider = document.getElementById('slider');
 
         let sliderPlaying = false;
-        const sliderPlay = () => {
+        const sliderPlay = (idx?: number) => {
             const slides = slider.querySelectorAll(slidesSelector);
             const activeSlide = slider.querySelector(playSelector);
             const slidesBtns = slider.querySelectorAll(sliderControlsSel);
@@ -67,17 +67,22 @@ import Slide from "./Slide.astro";
             if (sliderPlaying) {
                 return;
             }
+
+            const slidesArr = Array.prototype.slice.call(slides);
+            const activeIdx = slidesArr.indexOf(activeSlide);
+
+            if (idx && idx == activeIdx)
+                return;
+
             sliderPlaying = true;
             setTimeout(() => {
                 sliderPlaying = false;
             }, animationTimeMs);
 
-            const slidesArr = Array.prototype.slice.call(slides);
-            const activeIdx = slidesArr.indexOf(activeSlide);
             const slidesBtnActive = slider.querySelector(sliderControlActiveSel);
-            slidesBtnActive.classList.remove(playClsIn);
+            slidesBtnActive?.classList.remove(playClsIn);
 
-            const newIdx = activeIdx + 1
+            const newIdx = idx || activeIdx + 1
             if (newIdx < slides.length) {
                 slides[newIdx].classList.add(playClsIn);
                 slidesBtns[newIdx].classList.add(playClsIn);
@@ -90,8 +95,6 @@ import Slide from "./Slide.astro";
             setTimeout(() => {
                 activeSlide.classList.remove(playClsIn, playClsOut);
             }, animationTimeMs);
-
-            // console.log(activeIdx);
 
             return;
 
@@ -106,15 +109,17 @@ import Slide from "./Slide.astro";
 
         sliderPlay();
 
-        // const sliderPlayInitial = () => {
-        //     document.getElementById('slider').removeEventListener('mouseenter', sliderPlayInitial);
-        //     setTimeout(() => {
-        //         sliderPlay();
-        //     }, 100);
-        // }
+        const slidesBtns = slider.querySelectorAll(sliderControlsSel);
+        slidesBtns.forEach(btn => btn.addEventListener('click', (event: Event) => {
+            event.stopPropagation();
+            const idx = event.target.dataset.idx;
+            console.log('s btn idx', idx);
+            sliderPlay(idx);
+        }));
 
-        // slider.addEventListener("mouseenter", sliderPlayInitial);
-        slider.addEventListener("click", sliderPlay);
+        slider.addEventListener("click", () => {
+            sliderPlay();
+        });
     }
 
     initSlider();
