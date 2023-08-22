@@ -84,12 +84,14 @@ const {btnType = 'black'} = Astro.props;
             }
         }
 
-        &.transparent {
-            color: black;
-            border: 1px solid black;
+        &.btn-transparent {
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: white;
             background-color: transparent;
 
             &::after {
+                border-color: black;
                 background-color: black;
                 color: white;
             }
