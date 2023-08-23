@@ -1,9 +1,14 @@
 <div class="video">
+    <div id="video-player-box" class="player-box hidden">
 
-    <video id="video-player" class="player hidden" poster="/img/video-bg.png">
-        <source src="https://www.ensotyres.com/videos/moved-by-enso.webm" type="video/webm">
-        <source src="https://www.ensotyres.com/videos/moved-by-enso.mp4" type="video/mp4">
-    </video>
+        <video id="video-player" class="player" poster="/img/video-bg.png">
+            <source src="https://www.ensotyres.com/videos/moved-by-enso.webm" type="video/webm">
+            <source src="https://www.ensotyres.com/videos/moved-by-enso.mp4" type="video/mp4">
+        </video>
+
+        <div id="video-close-cta" class="video-close"></div>
+
+    </div>
 
     <div id="video-play-cta" class="video-cta-box">
         <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,35 +37,42 @@
         </svg>
     </div>
 
-    <div id="video-close-cta" class="video-close hidden"></div>
 
 </div>
 
 <script>
-    const videoPlayer = document.getElementById('video-player');
-    const playBtn = document.getElementById('video-play-cta');
-    const closeBtn = document.getElementById('video-close-cta');
 
-    playBtn.addEventListener('click', () => {
-        console.log('playBtn');
-        videoPlayer.classList.remove('hidden');
-        videoPlayer.play();
-        videoPlayer.setAttribute('controls', 'controls');
-        playBtn.classList.add('hidden');
-        closeBtn.classList.remove('hidden');
-    });
+    const initVideo = () => {
+        console.log('initVideo');
 
-    const closePlayer = () => {
-        console.log('ended');
-        playBtn.classList.remove('hidden')
-        videoPlayer.pause();
-        videoPlayer.removeAttribute('controls');
-        videoPlayer.classList.add('hidden');
-        closeBtn.classList.add('hidden');
+        const videoPlayerBox = document.getElementById('video-player-box');
+        const videoPlayer = document.getElementById('video-player');
+        const playBtn = document.getElementById('video-play-cta');
+        const closeBtn = document.getElementById('video-close-cta');
+
+        playBtn.addEventListener('click', () => {
+            console.log('playBtn');
+
+            videoPlayerBox.classList.remove('hidden');
+            videoPlayer.play();
+            videoPlayer.setAttribute('controls', 'controls');
+            playBtn.classList.add('hidden');
+            // closeBtn.classList.remove('hidden');
+        });
+
+        const closePlayer = () => {
+            playBtn.classList.remove('hidden')
+            videoPlayer.pause();
+            videoPlayer.removeAttribute('controls');
+            videoPlayerBox.classList.add('hidden');
+            // closeBtn.classList.add('hidden');
+        }
+
+        videoPlayer.addEventListener('ended', closePlayer);
+        closeBtn.addEventListener('click', closePlayer);
     }
 
-    videoPlayer.addEventListener('ended', closePlayer);
-    closeBtn.addEventListener('click', closePlayer);
+    initVideo();
 
 </script>
 
@@ -75,19 +87,30 @@
 
         position: relative;
 
+        .player-box {
+            opacity: 1;
+            transition: opacity .7s;
+            background-color: black;
 
-        .player {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
             top: 0;
             left: 0;
 
-            opacity: 1;
-            transition: opacity 1s;
+            z-index: 10;
+
+            .player {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+            }
 
             &.hidden {
                 opacity: 0;
+                z-index: -1;
             }
         }
 
@@ -106,6 +129,7 @@
                 opacity: 0;
             }
         }
+
 
         .video-close {
             position: absolute;
