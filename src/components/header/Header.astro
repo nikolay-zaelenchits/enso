@@ -94,6 +94,13 @@ import Button from "../button/Button.astro";
             margin-left: 90px;
             margin-right: 90px;
 
+            transition: margin .5s;
+
+            @media only screen and (max-width: 1100px) {
+                margin-left: 25px;
+                margin-right: 25px;
+            }
+
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,8 +120,41 @@ import Button from "../button/Button.astro";
             margin-right: auto;
             margin-left: 50px;
 
+            transition: all .5s;
+
             .btn {
+                transition: margin .5s;
                 margin-left: 50px;
+            }
+
+            @media only screen and (max-width: 1100px) {
+                margin-left: 25px;
+
+                .btn {
+                    margin-left: 25px;
+                }
+            }
+
+            @media only screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        .header {
+
+            .header-box {
+                .logo {
+                    svg,
+                    img {
+                    }
+                }
+            }
+
+            .header-links-box {
+                .btn {
+                }
             }
         }
     }

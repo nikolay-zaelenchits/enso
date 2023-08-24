@@ -37,22 +37,17 @@
         </svg>
     </div>
 
-
 </div>
 
 <script>
 
     const initVideo = () => {
-        console.log('initVideo');
-
         const videoPlayerBox = document.getElementById('video-player-box');
         const videoPlayer = document.getElementById('video-player');
         const playBtn = document.getElementById('video-play-cta');
         const closeBtn = document.getElementById('video-close-cta');
 
         playBtn.addEventListener('click', () => {
-            console.log('playBtn');
-
             videoPlayerBox.classList.remove('hidden');
             videoPlayer.play();
             videoPlayer.setAttribute('controls', 'controls');

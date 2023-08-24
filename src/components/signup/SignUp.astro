@@ -44,10 +44,11 @@ import Input from "../input/Input.astro";
 
             & > div {
                 width: 50%;
-                padding-right: 200px;
             }
 
             .signup-social {
+                padding-right: 10%;
+
                 & > div {
                     margin-top: 25px;
                     margin-bottom: 25px;
@@ -98,7 +99,7 @@ import Input from "../input/Input.astro";
                 display: flex;
                 flex-direction: column;
 
-                > div{
+                > div {
                     margin: 20px 0;
                 }
 
@@ -125,6 +126,29 @@ import Input from "../input/Input.astro";
                             color: black;
                         }
                     }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 1100px) {
+            padding-left: 25px;
+            padding-right: 25px;
+
+            padding-top: 50px;
+            padding-bottom: 50px;
+
+            .signup-content {
+                .signup-social {
+                    padding-right: 25px;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .signup-content {
+                flex-direction: column;
+                & > div {
+                    width: 100%;
                 }
             }
         }

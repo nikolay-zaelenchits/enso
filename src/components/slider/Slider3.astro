@@ -113,7 +113,6 @@ import Slide from "./Slide.astro";
         slidesBtns.forEach(btn => btn.addEventListener('click', (event: Event) => {
             event.stopPropagation();
             const idx = event.target.dataset.idx;
-            console.log('s btn idx', idx);
             sliderPlay(idx);
         }));
 
@@ -186,9 +185,7 @@ import Slide from "./Slide.astro";
 
             overflow: hidden;
 
-
             clip-path: polygon(-10% 0, 0 0, -10% 100%, 0 100%);
-
 
             background-color: white;
             color: black;
@@ -229,8 +226,8 @@ import Slide from "./Slide.astro";
             .slide {
                 position: absolute;
 
-                height: 80vh;
-                width: 100vw;
+                height: 100%;
+                width: 100%;
 
                 display: flex;
                 justify-content: space-between;
@@ -238,6 +235,9 @@ import Slide from "./Slide.astro";
 
                 padding-left: 90px;
                 padding-right: 90px;
+
+                padding-top: 55px;
+                padding-bottom: 75px;
 
                 .slide-txt-box {
                     width: 30%;
@@ -255,15 +255,37 @@ import Slide from "./Slide.astro";
                         font-family: BrandonGrotesque;
                         font-size: 17px;
                     }
+
+                    @media only screen and (max-width: 1100px) {
+                        width: 45%;
+                    }
                 }
 
                 .slide-img-box {
-                    height: 80%;
+                    height: 100%;
 
                     width: 50%;
                     background-image: url("/img/slide1.png");
                     background-position: center center;
                     background-size: cover;
+                }
+
+                @media only screen and (max-width: 1100px) {
+                    padding-left: 25px;
+                    padding-right: 25px;
+                }
+
+                @media only screen and (max-width: 900px) {
+                    flex-direction: column;
+
+                    .slide-txt-box {
+                        width: 100%;
+                        margin-bottom: 25px;
+                    }
+
+                    .slide-img-box {
+                        width: 100%;
+                    }
                 }
             }
         }
