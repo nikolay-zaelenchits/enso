@@ -1,0 +1,387 @@
+---
+import Button from "../button/Button.astro";
+import IconArrowShort from "../icons/IconArrowShort.astro";
+---
+
+<div class="news-wr">
+    <div class="news">
+        <div class="news-box">
+            <div class="news-list">
+                <div class="news-list-title">NEWS</div>
+                <div id="news-list" class="news-list-items">
+                    <!--
+                                        <div class="news-item" data-idx="1">
+                                            <div class="news-item-title">ENSO'S INNOVATION FEATURED BY REUTERS</div>
+                                            <div class="news-item-txt">FOR EVS TO BE SUCCESSFUL AT SCALE THEY NEED BETTER TYRES</div>
+                                        </div>
+                                        <div class="news-item" data-idx="2">
+                                            <div class="news-item-title">ENSO LAUNCHES LONDON STORE FOR ELECTRIC TAXIS</div>
+                                            <div class="news-item-txt">OFFERING RANGE-EXTENDING EV TYRES FOR LONDON TAXI MARKET</div>
+                                        </div>
+                                        <div class="news-item" data-idx="2">ENSO has launches its tyre store in London, offering its range-extending EV tyres to the London electric taxi market.</div>
+                                        <div class="news-item" data-idx="3">ENSO is proud to announce its innovative Pay-Per-Mile tyre for LEVC London electric taxis, to be launched in collaboration with ZETI, our digital fleet financing partner.</div>
+                                        <div class="news-item" data-idx="4">Enso Tyres is delighted to announce that it has been nominated to The Earthshot Prize, in the 'Clean Your Air' category. Thank you Cranfield University!</div>
+                    -->
+                </div>
+                <div class="news-list-btn-row">
+                    <Button>View All</Button>
+                </div>
+            </div>
+            <div id="news-img-box" class="news-img-box">
+                <!--                <div class="news-img news-img-1 play"></div>
+                                <div class="news-img news-img-2"></div>
+                                <div class="news-img news-img-3"></div>
+                                <div class="news-img news-img-4"></div>-->
+            </div>
+        </div>
+        <div class="news-box-btn-row">
+            <div id="btn-prev" class="btn-prev">
+                <IconArrowShort/>
+            </div>
+            <div id="btn-next" class="btn-next">
+                <IconArrowShort/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function fetchAsync(url) {
+        let response = await fetch(url);
+        let data = await response.json();
+        return data;
+    }
+
+    function htmlToElement(html) {
+        var template = document.createElement('template');
+        template.innerHTML = html;
+        return template.content.firstChild;
+    }
+
+    let maxIdx = 3;
+    let currIdx = -1;
+    const newsSelect = (idx: number) => {
+        currIdx = idx;
+
+        const currentNewsItem = document.querySelector('.news-item.play');
+        const currentImg = document.querySelector('.news-img.play');
+
+        const newItem = document.querySelector(`#news-list .news-item:nth-child(${1 + +idx})`);
+        const newImg = document.querySelector(`#news-img-box .news-img:nth-child(${1 + +idx})`);
+
+        if (currentNewsItem) {
+            currentNewsItem.classList.remove('play');
+        }
+        if (currentImg) {
+            currentImg.classList.remove('play');
+        }
+
+        if (newItem) {
+            newItem.classList.add('play');
+        }
+
+        if (newImg) {
+            newImg.classList.add('play');
+        }
+    }
+
+    const addEvent = () => {
+        const newsListBox = document.getElementById('news-list');
+
+        newsListBox.querySelectorAll('.news-item').forEach(node => node.addEventListener(
+            "mouseenter",
+            (event) => {
+                let idx = event.target.dataset.idx;
+                newsSelect(idx);
+            },
+            false,
+        ));
+
+        const changeNewsItem = (shift: number) => {
+            if (shift > maxIdx) {
+                shift = 0;
+            }
+            if (shift < 0) {
+                shift = maxIdx;
+            }
+            newsSelect(shift);
+        }
+
+        const btnPrev = document.getElementById('btn-prev');
+        btnPrev.addEventListener('click', () => {
+            changeNewsItem(currIdx - 1);
+        });
+        const btnNext = document.getElementById('btn-next');
+        btnNext.addEventListener('click', () => {
+            changeNewsItem(currIdx + 1);
+        });
+
+    }
+
+    const loadNews = async () => {
+        const news = await fetchAsync('https://ensotyres.com/wp/wp-json/api/posts');
+        const newsListBox = document.getElementById('news-list');
+        const newsImgBox = document.getElementById('news-img-box');
+
+        maxIdx = Math.min(news.length - 1, maxIdx);
+
+        newsListBox.innerHTML = "";
+        newsImgBox.innerHTML = "";
+        for (let i = 0; i < 4 && i < news.length; i++) {
+            let newsItem = news[i];
+            let htmlNewsTxtString = `<div class="news-item" data-idx="${i}"><div class="news-item-title">${newsItem.title}</div><div class="news-item-txt">${newsItem.excerpt}</div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><polygon points="7 7 15.586 7 5.293 17.293 6.707 18.707 17 8.414 17 17 19 17 19 5 7 5 7 7"/></svg></div>`;
+            newsListBox.appendChild(htmlToElement(htmlNewsTxtString));
+
+            // let htmlNewsImgString = `<div class="news-img" style={"background-image: url("${newsItem.image}")"}></div>`;
+            newsImgBox.innerHTML = `${newsImgBox.innerHTML}<div class="news-img" style='background-image: url(${newsItem.image});'></div>`;
+        }
+        newsSelect(0);
+
+        addEvent();
+    }
+
+    loadNews();
+
+</script>
+
+<style lang="scss" is:global>
+    .news-wr {
+        background-color: white;
+
+        padding-left: 90px;
+        padding-right: 90px;
+
+        @media only screen and (max-width: 1100px) {
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        .news {
+            height: 80vh;
+            min-height: 440px;
+
+            padding-top: 55px;
+            padding-bottom: 55px;
+
+            .news-box {
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .news-list {
+                    width: 50%;
+
+                    .news-list-title {
+                        font-size: 36px;
+                        font-weight: bold;
+                    }
+
+                    .news-list-items {
+                        padding: 20px 20px 20px 0;
+
+                        .news-item {
+                            display: block;
+                            position: relative;
+                            padding: 20px 110px 20px 0;
+
+                            font-weight: bold;
+
+                            cursor: pointer;
+
+                            color: grey;
+                            text-decoration: none;
+
+                            transition: all .7s;
+
+                            .news-item-title {
+                                font-size: 16px;
+                                //font-family: BrandonGrotesque;
+                            }
+
+                            .news-item-txt {
+                                font-family: BrandonGrotesque;
+                                font-size: 14px;
+                                font-weight: normal;
+                            }
+
+                            svg {
+                                position: absolute;
+                                height: 30px;
+                                transform: rotate(45deg);
+                                right: 70px;
+                                top: 0;
+                                bottom: 0;
+                                margin: auto;
+                                //opacity: .5;
+                                transition: all .7s;
+                                color: lightgray;
+                            }
+
+                            &:hover,
+                            &.play {
+                                color: black;
+
+                                svg {
+                                    //opacity: 1;
+                                    right: 30px;
+                                    color: black;
+                                }
+                            }
+
+                            @media only screen and (max-width: 1100px) {
+                                padding-right: 55px;
+
+                                svg {
+                                    right: 25px;
+                                }
+
+                                &:hover {
+                                    svg {
+                                        right: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .news-list-btn-row {
+                        display: flex;
+                    }
+                }
+
+                .news-img-box {
+                    width: 50%;
+                    height: 100%;
+
+                    position: relative;
+
+                    .news-img {
+                        position: absolute;
+                        //width: 100%;
+                        //height: 100%;
+
+                        $offset: 30px;
+
+                        top: -$offset;
+                        bottom: $offset;
+                        //left: $offset;
+                        //right: $offset;
+                        left: 0;
+                        right: 0;
+
+                        background-position: center center;
+                        background-size: cover;
+
+                        opacity: 0;
+                        transition: all 1.5s;
+
+                        &.play {
+                            opacity: 1;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                        }
+
+                        &.news-img-1 {
+                            background-image: url("/img/news1.jpg");
+                        }
+
+                        &.news-img-2 {
+                            background-image: url("/img/news2.jpeg");
+                        }
+
+                        &.news-img-3 {
+                            background-image: url("/img/news3.jpg");
+                        }
+
+                        &.news-img-4 {
+                            background-image: url("/img/news4.jpg");
+                        }
+                    }
+
+                }
+            }
+
+            .news-box-btn-row {
+                display: none;
+            }
+
+            @media only screen and (max-width: 1000px) {
+                height: 90vh;
+
+                .news-box {
+                    flex-direction: column;
+
+                    .news-list {
+                        width: 100%;
+
+                        .news-list-items {
+                            padding-right: 0;
+                            position: relative;
+                            height: 80px;
+                            overflow: hidden;
+
+                            .news-item {
+                                position: absolute;
+                                top: 0;
+                                opacity: 0;
+                                padding: 0;
+
+                                &.play {
+                                    display: block;
+                                    opacity: 1;
+                                    top: 15px;
+                                }
+
+                                svg {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        .news-list-btn-row {
+                            display: none;
+                        }
+                    }
+
+
+                    .news-img-box {
+                        width: 100%;
+
+                        .news-img {
+                            transition: all .3s;
+                        }
+                    }
+                }
+
+                .news-box-btn-row {
+                    margin-top: 16px;
+                    padding: 0 15px;
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+
+                    > div {
+                        width: 25px;
+                        height: 25px;
+                        cursor: pointer;
+                    }
+
+                    .btn-prev {
+                        svg {
+                            transform: rotate(-135deg);
+                        }
+                    }
+
+                    .btn-next {
+                        svg {
+                            transform: rotate(45deg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>
