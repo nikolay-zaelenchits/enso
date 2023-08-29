@@ -18,23 +18,17 @@ const wrImgUrl = `url(${imgUrl})`;
             <div class="slide-title">{title}</div>
             <div class="slide-txt">{txt}</div>
         </div>
-<!--
-        {imgUrl ?
-            <div class="slide-img-box" style={`background-image: url(${imgUrl})`}>
-                <div class="slide-img-box">
-                    <slot/>
-                </div>
-            :
--->
         <div class="slide-img-box">
             <slot/>
         </div>
-        <!--}-->
     </div>
 </div>
 
+<!--
 <style lang="scss" define:vars={{wrImgUrl}}>
     .slide-wr .slide .slide-img-box {
-        background-image: var(--wrImgUrl) !important;
+        background-image: var(&#45;&#45;wrImgUrl) !important;
+        background-image: none !important;
     }
 </style>
+-->

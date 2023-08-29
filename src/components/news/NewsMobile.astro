@@ -90,7 +90,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
 
         newsListBox.querySelectorAll('.news-item').forEach(node => node.addEventListener(
             "mouseenter",
-            (event) => {
+            (event: MouseEvent) => {
                 let idx = event.target.dataset.idx;
                 newsSelect(idx);
             },
@@ -223,7 +223,6 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                                 color: black;
 
                                 svg {
-                                    //opacity: 1;
                                     right: 30px;
                                     color: black;
                                 }
@@ -258,15 +257,11 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
 
                     .news-img {
                         position: absolute;
-                        //width: 100%;
-                        //height: 100%;
 
                         $offset: 30px;
-
                         top: -$offset;
                         bottom: $offset;
-                        //left: $offset;
-                        //right: $offset;
+
                         left: 0;
                         right: 0;
 
@@ -300,7 +295,6 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                             background-image: url("/img/news4.jpg");
                         }
                     }
-
                 }
             }
 
@@ -345,7 +339,6 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                             display: none;
                         }
                     }
-
 
                     .news-img-box {
                         width: 100%;

@@ -9,23 +9,32 @@ import Slide from "./Slide.astro";
                 title="ABOUT ENSO"
                 txt="ENSO is developing sustainable tyres for electric vehicles, delivering sustainable mobility by improving the performance and environmental impact of tyres."
                 imgUrl={"/enso/img/news2.jpeg"}
-        />
-
+        >
+            <img src="/enso/img/news2.jpeg"/>
+        </Slide>
         <Slide
                 title="SUSTAINABILITY"
                 txt="ENSO is driven by sustainability and creating a balance in how we live and move – today and tomorrow. This belief is central to how we act, design and make our products, and how we build our business."
                 imgUrl={"/enso/img/slide2.png"}
-        />
+        >
+            <img src="/enso/img/slide2.png"/>
+        </Slide>
+
         <Slide
                 title="SOME MORE"
                 txt="ENSO is looking to deliver tyres with uncompromised performance, without passing the cost to drivers or the environment, moving electric vehicles to a truly sustainable future."
                 imgUrl={"/enso/img/slide4.png"}
-        />
+        >
+            <img src="/enso/img/slide4.png"/>
+        </Slide>
+
         <Slide
                 title="THE MEANING OF ENSO"
                 txt="We are often asked why we named our company ENSO. An ‘ensō’ in Zen Buddhism means a hand-drawn circle, created in a single brushstroke that symbolises strength, elegance, and the circularity of nature. Creating an ‘ensō’ circle relies on both concentration and mindfulness, clearing your mind while being fully present in the moment. When painted with black pigment, an ‘ensō’ also looks very much like a tyre. As a company developing a circular business model for tyres, we felt that ENSO gave us a clean and holistic tyre brand that symbolised that we are looking to work in harmony with nature, to bring together sustainability and better performance for electric vehicles. Ultimately it is vital that we take better care of our nature, people and planet, to find a balanced way of living. We would love you to join us on this journey and become part of our circle"
                 imgUrl={"/enso/img/slide3.png"}
-        />
+        >
+            <img src="/enso/img/slide3.png"/>
+        </Slide>
 
 
         <div class="slider-controls">
@@ -197,32 +206,6 @@ import Slide from "./Slide.astro";
                 color: white;
             }
 
-            &.slide-in {
-                z-index: 2;
-                transition: clip-path .8s;
-                clip-path: polygon(0 0, 110% 0, 100% 100%, -10% 100%);
-
-                .slide {
-                    .slide-txt-box {
-                        margin-left: 0;
-                    }
-                }
-
-                &.slide-out {
-                    z-index: 1;
-                    //transition: clip-path 1ms;
-
-                    .slide {
-                        .slide-txt-box {
-                            margin-left: -30px;
-                        }
-                    }
-
-                }
-
-            }
-
-
             .slide {
                 position: absolute;
 
@@ -265,9 +248,22 @@ import Slide from "./Slide.astro";
                     height: 100%;
 
                     width: 50%;
-                    background-image: url("/img/slide1.png");
+                    background-image: url("/img/slide2.png");
                     background-position: center center;
                     background-size: cover;
+
+                    position: relative;
+
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        object-fit: cover;
+                        width: 110%;
+                        height: 110%;
+                        transition: all 0.9s 0.1s;
+                    }
                 }
 
                 @media only screen and (max-width: 1100px) {
@@ -287,6 +283,38 @@ import Slide from "./Slide.astro";
                         width: 100%;
                     }
                 }
+            }
+
+            &.slide-in {
+                z-index: 2;
+                transition: clip-path .8s;
+                clip-path: polygon(0 0, 110% 0, 100% 100%, -10% 100%);
+
+                .slide {
+                    .slide-txt-box {
+                        margin-left: 0;
+                    }
+
+                    .slide-img-box {
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+
+                &.slide-out {
+                    z-index: 1;
+                    //transition: clip-path 1ms;
+
+                    .slide {
+                        .slide-txt-box {
+                            margin-left: -30px;
+                        }
+                    }
+
+                }
+
             }
         }
     }
