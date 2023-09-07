@@ -1,0 +1,44 @@
+---
+import Button from "../button/Button.astro";
+---
+
+<div class="bcorp-wr">
+    <div class="bcorp-txt">ENSO is the only Certified B-Corporation in the tire industry</div>
+    <div class="bcorp-btn-row">
+        <Button btnType="white" linkUrl="https://www.bcorporation.net/en-us/find-a-b-corp/company/enso/">
+            Find out more
+        </Button>
+    </div>
+</div>
+
+<style lang="scss" is:global>
+    .bcorp-wr {
+        padding: 90px;
+
+        background-color: var(--clr-main);
+
+        .bcorp-txt {
+            font-size: 44px;
+            /*font-family: "Brandon";*/
+            font-family: "BrandonGrotesque";
+            color: var(--clr-lightest);
+        }
+
+        .bcorp-btn-row {
+            display: flex;
+
+            .btn.btn-white:hover{
+                border-color: var(--clr-lightest);
+            }
+
+            .btn.btn-white::after {
+                background-color: var(--clr-main);;
+            }
+        }
+
+        @media only screen and (max-width: 1100px) {
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+    }
+</style>

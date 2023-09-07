@@ -11,6 +11,13 @@ const {btnType = 'black'} = Astro.props;
 </div>
 
 <style lang="scss" is:global>
+    :root {
+        --btn-clr-dark: var(--clr-dark);
+        --btn-clr-light: var(--clr-lightest);
+        --btn-clr-med: var(--clr-medium);
+    }
+
+
     .btn {
         cursor: pointer;
         font-family: BrandonGrotesque;
@@ -23,7 +30,8 @@ const {btnType = 'black'} = Astro.props;
 
         -webkit-transition: color 0.3s;
         transition: color 0.3s;
-        border: 1px solid black;
+        border: 1px solid;
+        border-color: var(--btn-clr-dark);
 
         user-select: none;
 
@@ -45,7 +53,7 @@ const {btnType = 'black'} = Astro.props;
         }
 
         &::before {
-            background-color: gray;
+            background-color: var(--btn-clr-med);
         }
 
         &:hover::before,
@@ -62,48 +70,49 @@ const {btnType = 'black'} = Astro.props;
         }
 
         &.btn-black {
-            color: white;
-            background-color: black;
+            color: var(--btn-clr-light);
+            background-color: var(--btn-clr-dark);
 
             &::after {
-                background-color: white;
-                color: black;
+                background-color: var(--btn-clr-light);
+                color: var(--btn-clr-dark);
             }
 
             &:hover {
-                color: black;
+                color: var(--btn-clr-dark);
             }
         }
 
         &.btn-white {
-            color: black;
-            border: 1px solid black;
-            background-color: white;
+            color: var(--btn-clr-dark);
+            border: 1px solid;
+            border-color: var(--btn-clr-dark);;
+            background-color: var(--btn-clr-light);
 
             &::after {
-                background-color: black;
-                color: white;
+                background-color: var(--btn-clr-dark);
+                color: var(--btn-clr-light);
             }
 
             &:hover {
-                color: white;
+                color: var(--btn-clr-light);
             }
         }
 
         &.btn-transparent {
             border: none;
             border-bottom: 2px solid transparent;
-            color: white;
+            color: var(--btn-clr-light);
             background-color: transparent;
 
             &::after {
-                border-color: black;
-                background-color: black;
-                color: white;
+                border-color: var(--btn-clr-dark);
+                background-color: var(--btn-clr-dark);
+                color: var(--btn-clr-light);
             }
 
             &:hover {
-                color: white;
+                color: var(--btn-clr-light);
             }
         }
     }

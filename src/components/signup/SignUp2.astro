@@ -1,0 +1,116 @@
+---
+import Button from "../button/Button.astro";
+import Input2 from "../input/Input2.astro";
+---
+
+<div class="signup">
+    <div class="signup-content">
+        <div class="signup-social">
+            <div class="signup-social-title">RECEIVE OUR NEWSLETTER</div>
+            <div class="signup-social-txt">Sign up to the ENSO Memo to get our latest news and updates, keeping you in the loop about our activities, events and latest innovations. For more frequent updates please follow us on social media.</div>
+        </div>
+        <div class="signup-form">
+            <div class="signup-form-field">
+                <Input2 idx="email" label="Enter your email address"/>
+            </div>
+            <div class="signup-btn-row">
+                <Button>Contact Us</Button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style lang="scss" is:global>
+    .signup {
+        padding-left: 90px;
+        padding-right: 90px;
+
+        padding-top: 120px;
+        padding-bottom: 120px;
+
+        background-color: var(--clr-light);
+
+        .signup-content {
+            display: flex;
+            align-items: center;
+
+            .signup-social {
+                padding-right: 10%;
+
+                width: 60%;
+
+                & > div {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+
+                font-family: BrandonGrotesque;
+
+                .signup-social-title {
+                    font-size: 20px;
+                    font-weight: bold;
+
+                    color: var(--clr-medium);
+                }
+
+                .signup-social-txt {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: var(--clr-dark);
+                }
+            }
+
+            .signup-form {
+                display: flex;
+                flex-direction: column;
+
+                width: 40%;
+
+                > div {
+                    margin: 10px 0;
+                }
+
+                .signup-form-field {
+                    /*font-weight: bold;*/
+                    /*padding: 20px;*/
+                    /*margin-top: 20px;*/
+                    /*font-size: 13px;*/
+                    input {
+                        width: 60%
+                    }
+                }
+
+                .signup-btn-row {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    display: flex;
+                }
+
+            }
+        }
+
+        @media only screen and (max-width: 1100px) {
+            padding-left: 25px;
+            padding-right: 25px;
+
+            padding-top: 50px;
+            padding-bottom: 50px;
+
+            .signup-content {
+                .signup-social {
+                    padding-right: 25px;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .signup-content {
+                flex-direction: column;
+
+                & > div {
+                    width: 100%;
+                }
+            }
+        }
+    }
+</style>

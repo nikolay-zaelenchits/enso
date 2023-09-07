@@ -61,10 +61,13 @@ import Button from "../button/Button.astro";
             <Button btnType="transparent">ABOUT</Button>
             <Button btnType="transparent">VIDEO</Button>
             <Button btnType="transparent">NEWS</Button>
+            <Button btnType="transparent">CONTACT</Button>
         </div>
+<!--
         <div class="contact-btn-box">
             <Button>Contact Us</Button>
         </div>
+-->
     </div>
 </div>
 
@@ -74,7 +77,7 @@ import Button from "../button/Button.astro";
 
 <style lang="scss" is:global>
     $header-bg: transparent;
-    $logo-color: #fff;
+    $logo-color: var(--clr-lightest);
 
     .header {
         position: absolute;
@@ -117,7 +120,7 @@ import Button from "../button/Button.astro";
 
         .header-links-box {
             display: flex;
-            margin-right: auto;
+            /*margin-right: auto;*/
             margin-left: 50px;
 
             transition: all .5s;

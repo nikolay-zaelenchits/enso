@@ -19,7 +19,11 @@ const {label} = Astro.props;
     $fFontSize: 15px;
 
     //$fMainColor: #5264AE;
-    $fMainColor: black;
+    /*$fMainColor: black;*/
+
+    :root{
+        --inp-main-clr: var(--clr-darker);
+    }
 
     .group {
         position: relative;
@@ -57,7 +61,7 @@ const {label} = Astro.props;
     input:focus ~ label, input:valid ~ label {
         top: -20px;
         font-size: calc($fFontSize - 2px);
-        color: $fMainColor;
+        color: --inp-main-clr;
     }
 
     /* BOTTOM BARS ================================= */
@@ -73,7 +77,7 @@ const {label} = Astro.props;
         width: 0;
         bottom: 1px;
         position: absolute;
-        background: $fMainColor;
+        background: --inp-main-clr;
         transition: 0.2s ease all;
         -moz-transition: 0.2s ease all;
         -webkit-transition: 0.2s ease all;
@@ -113,7 +117,7 @@ const {label} = Astro.props;
     /* ANIMATIONS ================ */
     @-webkit-keyframes inputHighlighter {
         from {
-            background: $fMainColor;
+            background: --inp-main-clr;
         }
         to {
             width: 0;
@@ -123,7 +127,7 @@ const {label} = Astro.props;
 
     @-moz-keyframes inputHighlighter {
         from {
-            background: $fMainColor;
+            background: --inp-main-clr;
         }
         to {
             width: 0;
@@ -133,7 +137,7 @@ const {label} = Astro.props;
 
     @keyframes inputHighlighter {
         from {
-            background: $fMainColor;
+            background: --inp-main-clr;
         }
         to {
             width: 0;

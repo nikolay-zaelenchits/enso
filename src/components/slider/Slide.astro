@@ -16,10 +16,13 @@ const wrImgUrl = `url(${imgUrl})`;
     <div class="slide">
         <div class="slide-txt-box">
             <div class="slide-title">{title}</div>
-            <div class="slide-txt">{txt}</div>
+            <div class="slide-txt">
+                {txt}
+                <slot/>
+            </div>
         </div>
         <div class="slide-img-box">
-            <slot/>
+            <img src={imgUrl}/>
         </div>
     </div>
 </div>

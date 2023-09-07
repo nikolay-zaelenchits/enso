@@ -1,0 +1,34 @@
+---
+interface Props {
+    label: string;
+    idx: string;
+}
+
+const {label, idx} = Astro.props;
+---
+
+<div class="input-field">
+    <input placeholder={label} name={idx} type="text" required>
+    <!--<label for={idx}>{label}</label>-->
+</div>
+
+<style lang="scss" is:global>
+    .input-field {
+        position: relative;
+
+        input {
+            background-color: var(--clr-light);
+            border: 1px solid;
+            border-color: var(--btn-clr-dark);
+
+            font-family: BrandonGrotesque;
+            font-size: 16px;
+            padding: 10px;
+
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+</style>

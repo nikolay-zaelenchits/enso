@@ -11,11 +11,15 @@ import Button from "../button/Button.astro";
     </div>
 
     <div class="hero-txt-box">
-        <div class="hero-txt-row">SUSTAINABLE TYRES FOR ELECTRICAL VEHICLES</div>
-        <div class="hero-btn-row">
-            <Button>Watch Video</Button>
-            <Button btnType="white">Contact Us</Button>
-        </div>
+        <div class="hero-title-row">BETTER TIRES FOR ELECTRIC VEHICLES</div>
+        <div class="hero-txt-row">More EV range, less tire pollution.</div>
+        <!--        <div class="hero-btn-row">
+                    <Button>Watch Video</Button>
+                    <Button btnType="white">Contact Us</Button>
+                </div>-->
+    </div>
+
+    <div class="hero-logo-box">
     </div>
 </div>
 
@@ -79,8 +83,6 @@ import Button from "../button/Button.astro";
 
             iframe {
                 position: absolute;
-                //min-width: 100%;
-                //min-height: 100%;
                 top: 50%;
                 left: 50%;
                 transform: translatex(-50%) translatey(-50%);
@@ -89,6 +91,8 @@ import Button from "../button/Button.astro";
                 width: 177.77777778vh;
                 min-width: 100.1%;
                 min-height: 56.25vw;
+
+                filter: saturate(2);
             }
         }
 
@@ -98,7 +102,7 @@ import Button from "../button/Button.astro";
             padding-left: 90px;
             padding-right: 90px;
             top: 50%;
-            transform: translatey(-50%);
+            transform: translatey(-55%);
             max-width: 800px;
 
             @media only screen and (max-width: 1100px) {
@@ -111,12 +115,17 @@ import Button from "../button/Button.astro";
             //    padding-right: 20px;
             //}
 
-            .hero-txt-row {
-                color: white;
-                font-size: 50px;
+            .hero-title-row {
+                color: var(--clr-lightest);
+                font-size: 51px;
                 font-weight: bold;
                 line-height: 1.4;
-                padding-bottom: 25px;
+                padding-bottom: 10px;
+            }
+
+            .hero-txt-row {
+                color: var(--clr-lightest);
+                font-size: 30px;
             }
 
             .hero-btn-row {
@@ -126,6 +135,18 @@ import Button from "../button/Button.astro";
                     margin-right: 15px;
                 }
             }
+        }
+
+        .hero-logo-box {
+            position: absolute;
+            background-image: url("/img/B-Corp-Logo-White-RGB.png");
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            right: 90px;
+            bottom: 40px;
+            width: 60px;
+            height: 100px;
         }
     }
 
