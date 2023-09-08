@@ -1,12 +1,13 @@
 ---
 import Button from "../button/Button.astro";
+import IconArrowShort from "../icons/IconArrowShort.astro";
 ---
 
 <div class="bcorp-wr">
     <div class="bcorp-txt">ENSO is the only Certified B-Corporation in the tire industry</div>
     <div class="bcorp-btn-row">
         <Button btnType="white" linkUrl="https://www.bcorporation.net/en-us/find-a-b-corp/company/enso/">
-            Find out more
+            Find out more <IconArrowShort/>
         </Button>
     </div>
 </div>
@@ -37,8 +38,9 @@ import Button from "../button/Button.astro";
         }
 
         @media only screen and (max-width: 1100px) {
-            padding-left: 25px;
-            padding-right: 25px;
+            /*padding-left: 25px;*/
+            /*padding-right: 25px;*/
+            padding: 45px 25px;
         }
     }
 </style>

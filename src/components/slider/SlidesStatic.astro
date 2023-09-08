@@ -165,7 +165,24 @@ import Slide from "./Slide.astro";
         });
     }
 
-    initSlider();
+    // initSlider();
+
+    const initStatic = () => {
+        const slideWrCls = 'slide-wr';
+        const slidesSelector = `.${slideWrCls}`;
+        const playClsIn = 'slide-in';
+        const playClsOut = 'slide-out';
+        const playSelector = `.${playClsIn}`;
+        const sliderControlsSel = '.slider-controls > div';
+        const sliderControlActiveSel = `.slider-controls > div.${playClsIn}`;
+
+        const slider = document.getElementById('slider');
+        const slides = slider.querySelectorAll(slidesSelector);
+        slides.forEach(s=>{
+            s.classList.add(playClsIn);
+        });
+    }
+    initStatic();
 
 </script>
 
@@ -175,7 +192,7 @@ import Slide from "./Slide.astro";
     }
 
     .slider {
-        height: 90vh;
+        /*height: 90vh;*/
         min-height: 440px;
 
         position: relative;
@@ -222,12 +239,16 @@ import Slide from "./Slide.astro";
         }
 
         .slide-wr {
-            position: absolute;
+            /*position: absolute;*/
             top: 0;
             left: 0;
 
+            /*width: 100%;*/
+            /*height: 100%;*/
+
+            position: relative;
             width: 100%;
-            height: 100%;
+            height: 80vh;
 
             overflow: hidden;
 

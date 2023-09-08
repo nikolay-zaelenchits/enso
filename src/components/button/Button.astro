@@ -1,14 +1,22 @@
 ---
 interface Props {
     btnType?: 'white' | 'transparent';
+    linkUrl?: string;
 }
 
-const {btnType = 'black'} = Astro.props;
+const {btnType = 'black', linkUrl} = Astro.props;
 ---
 
+{linkUrl?
+<a href={linkUrl} target="_blank" class={"btn btn-" + btnType}>
+    <slot/>
+</a>
+    :
 <div class={"btn btn-" + btnType}>
     <slot/>
 </div>
+    }
+
 
 <style lang="scss" is:global>
     :root {
@@ -34,6 +42,17 @@ const {btnType = 'black'} = Astro.props;
         border-color: var(--btn-clr-dark);
 
         user-select: none;
+
+        display: flex;
+        white-space: nowrap;
+
+        text-decoration: none;
+
+        svg {
+            width: 16px;
+            margin-left: 20px;
+            transform: rotate(45deg);
+        }
 
         &::before,
         &::after {

@@ -2,24 +2,27 @@
 import Button from "../button/Button.astro";
 ---
 
-<div class="hero">
-    <div class="hero-bg-box"></div>
-    <div id="hero-video-box" class="hero-video-box">
-        <div class="hero-iframe-wr">
-            <iframe id="hero-video-frame" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="__01_loop_introvideo _DESKTOP 16-9" data-ready="true" src="https://player.vimeo.com/video/320459562?title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;autoplay=1&amp;loop=1&amp;background=1&amp;app_id=122963"></iframe>
+<div class="hero-wr">
+    <div class="hero-wr-gap"></div>
+    <div class="hero">
+        <div class="hero-bg-box"></div>
+        <div id="hero-video-box" class="hero-video-box">
+            <div class="hero-iframe-wr">
+                <iframe id="hero-video-frame" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="__01_loop_introvideo _DESKTOP 16-9" data-ready="true" src="https://player.vimeo.com/video/320459562?title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;autoplay=1&amp;loop=1&amp;background=1&amp;app_id=122963"></iframe>
+            </div>
         </div>
-    </div>
 
-    <div class="hero-txt-box">
-        <div class="hero-title-row">BETTER TIRES FOR ELECTRIC VEHICLES</div>
-        <div class="hero-txt-row">More EV range, less tire pollution.</div>
-        <!--        <div class="hero-btn-row">
-                    <Button>Watch Video</Button>
-                    <Button btnType="white">Contact Us</Button>
-                </div>-->
-    </div>
+        <div class="hero-txt-box">
+            <div class="hero-title-row">BETTER TIRES FOR ELECTRIC VEHICLES</div>
+            <div class="hero-txt-row">More EV range, less tire pollution.</div>
+            <!--        <div class="hero-btn-row">
+                        <Button>Watch Video</Button>
+                        <Button btnType="white">Contact Us</Button>
+                    </div>-->
+        </div>
 
-    <div class="hero-logo-box">
+        <div class="hero-logo-box">
+        </div>
     </div>
 </div>
 
@@ -39,8 +42,6 @@ import Button from "../button/Button.astro";
 <style lang="scss" is:global>
     .hero {
         height: 100vh;
-
-        position: relative;
 
         .hero-bg-box {
             position: absolute;

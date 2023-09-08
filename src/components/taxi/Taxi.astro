@@ -3,42 +3,48 @@ import Button from "../button/Button.astro";
 import IconArrowShort from "../icons/IconArrowShort.astro";
 ---
 
-<div class="news-wr">
-    <div class="news">
-        <div class="news-box">
-            <div class="news-list">
-                <div class="news-list-title">NEWS</div>
-                <div id="news-list" class="news-list-items">
-                    <!--
-                                        <div class="news-item" data-idx="1">
-                                            <div class="news-item-title">ENSO'S INNOVATION FEATURED BY REUTERS</div>
-                                            <div class="news-item-txt">FOR EVS TO BE SUCCESSFUL AT SCALE THEY NEED BETTER TYRES</div>
-                                        </div>
-                                        <div class="news-item" data-idx="2">
-                                            <div class="news-item-title">ENSO LAUNCHES LONDON STORE FOR ELECTRIC TAXIS</div>
-                                            <div class="news-item-txt">OFFERING RANGE-EXTENDING EV TYRES FOR LONDON TAXI MARKET</div>
-                                        </div>
-                                        <div class="news-item" data-idx="2">ENSO has launches its tyre store in London, offering its range-extending EV tyres to the London electric taxi market.</div>
-                                        <div class="news-item" data-idx="3">ENSO is proud to announce its innovative Pay-Per-Mile tyre for LEVC London electric taxis, to be launched in collaboration with ZETI, our digital fleet financing partner.</div>
-                                        <div class="news-item" data-idx="4">Enso Tyres is delighted to announce that it has been nominated to The Earthshot Prize, in the 'Clean Your Air' category. Thank you Cranfield University!</div>
-                    -->
+<div class="taxi-wr">
+    <div class="taxi">
+        <div class="taxi-box">
+            <div class="taxi-list">
+                <div class="taxi-list-head">ENSO FOR LONDON TAXIS</div>
+                <div class="taxi-list-title">Available today for LEVC electric taxis.</div>
+                <div id="taxi-list" class="taxi-list-items">
+                    <div class="taxi-item" data-idx="0">
+                        <div class="taxi-item-title">More EV range</div>
+                        <!--<div class="taxi-item-txt">FOR EVS TO BE SUCCESSFUL AT SCALE THEY NEED BETTER TYRES</div>-->
+                        <IconArrowShort/>
+                    </div>
+                    <div class="taxi-item" data-idx="1">
+                        <div class="taxi-item-title">Better safety</div>
+                        <!--<div class="taxi-item-txt">OFFERING RANGE-EXTENDING EV TYRES FOR LONDON TAXI MARKET</div>-->
+                        <IconArrowShort/>
+                    </div>
+                    <div class="taxi-item" data-idx="2">
+                        <div class="taxi-item-title">Lower cost</div>
+                        <IconArrowShort/>
+                    </div>
+                    <!--<div class="taxi-item" data-idx="3">Enso Tyres is delighted to announce that it has been nominated to The Earthshot Prize, in the 'Clean Your Air' category. Thank you Cranfield University!</div>-->
+
                 </div>
-                <div class="news-list-btn-row">
-                    <Button>View All <IconArrowShort/></Button>
+                <div class="taxi-list-btn-row">
+                    <Button linkUrl="http://enso.london/">Book now
+                        <IconArrowShort/>
+                    </Button>
                 </div>
             </div>
-            <div id="news-img-box" class="news-img-box">
-                <!--                <div class="news-img news-img-1 play"></div>
-                                <div class="news-img news-img-2"></div>
-                                <div class="news-img news-img-3"></div>
-                                <div class="news-img news-img-4"></div>-->
+            <div id="taxi-img-box" class="taxi-img-box">
+                <div class="taxi-img taxi-img-1"></div>
+                <div class="taxi-img taxi-img-2"></div>
+                <div class="taxi-img taxi-img-3"></div>
+                <!--<div class="taxi-img taxi-img-4"></div>-->
             </div>
         </div>
-        <div class="news-box-btn-row">
-            <div id="news-btn-prev" class="news-btn-prev">
+        <div class="taxi-box-btn-row">
+            <div id="taxi-btn-prev" class="taxi-btn-prev">
                 <IconArrowShort/>
             </div>
-            <div id="news-btn-next" class="news-btn-next">
+            <div id="taxi-btn-next" class="taxi-btn-next">
                 <IconArrowShort/>
             </div>
         </div>
@@ -58,19 +64,19 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
         return template.content.firstChild;
     }
 
-    let maxIdx = 3;
+    let maxIdx = 2;
     let currIdx = -1;
-    const newsSelect = (idx: number) => {
+    const taxiSelect = (idx: number) => {
         currIdx = idx;
 
-        const currentNewsItem = document.querySelector('.news-item.play');
-        const currentImg = document.querySelector('.news-img.play');
+        const currentTaxiItem = document.querySelector('.taxi-item.play');
+        const currentImg = document.querySelector('.taxi-img.play');
 
-        const newItem = document.querySelector(`#news-list .news-item:nth-child(${1 + +idx})`);
-        const newImg = document.querySelector(`#news-img-box .news-img:nth-child(${1 + +idx})`);
+        const newItem = document.querySelector(`#taxi-list .taxi-item:nth-child(${1 + +idx})`);
+        const newImg = document.querySelector(`#taxi-img-box .taxi-img:nth-child(${1 + +idx})`);
 
-        if (currentNewsItem) {
-            currentNewsItem.classList.remove('play');
+        if (currentTaxiItem) {
+            currentTaxiItem.classList.remove('play');
         }
         if (currentImg) {
             currentImg.classList.remove('play');
@@ -86,66 +92,68 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
     }
 
     const addEvent = () => {
-        const newsListBox = document.getElementById('news-list');
+        const taxiListBox = document.getElementById('taxi-list');
 
-        newsListBox.querySelectorAll('.news-item').forEach(node => node.addEventListener(
+        taxiListBox.querySelectorAll('.taxi-item').forEach(node => node.addEventListener(
             "mouseenter",
             (event: MouseEvent) => {
                 let idx = event.target.dataset.idx;
-                newsSelect(idx);
+                taxiSelect(idx);
             },
             false,
         ));
 
-        const changeNewsItem = (shift: number) => {
+        const changeTaxiItem = (shift: number) => {
             if (shift > maxIdx) {
                 shift = 0;
             }
             if (shift < 0) {
                 shift = maxIdx;
             }
-            newsSelect(shift);
+            taxiSelect(shift);
         }
 
-        const btnPrev = document.getElementById('news-btn-prev');
+        const btnPrev = document.getElementById('taxi-btn-prev');
         btnPrev.addEventListener('click', () => {
-            changeNewsItem(currIdx - 1);
+            changeTaxiItem(currIdx - 1);
         });
-        const btnNext = document.getElementById('news-btn-next');
+        const btnNext = document.getElementById('taxi-btn-next');
         btnNext.addEventListener('click', () => {
-            changeNewsItem(currIdx + 1);
+            changeTaxiItem(currIdx + 1);
         });
 
     }
 
-    const loadNews = async () => {
-        const news = await fetchAsync('https://ensotyres.com/wp/wp-json/api/posts');
-        const newsListBox = document.getElementById('news-list');
-        const newsImgBox = document.getElementById('news-img-box');
+    const loadTaxi = async () => {
+        /*
+        const taxi = await fetchAsync('https://ensotyres.com/wp/wp-json/api/posts');
+        const taxiListBox = document.getElementById('taxi-list');
+        const taxiImgBox = document.getElementById('taxi-img-box');
 
-        maxIdx = Math.min(news.length - 1, maxIdx);
+        maxIdx = Math.min(taxi.length - 1, maxIdx);
 
-        newsListBox.innerHTML = "";
-        newsImgBox.innerHTML = "";
-        for (let i = 0; i < 4 && i < news.length; i++) {
-            let newsItem = news[i];
-            let htmlNewsTxtString = `<div class="news-item" data-idx="${i}"><div class="news-item-title">${newsItem.title}</div><div class="news-item-txt">${newsItem.excerpt}</div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><polygon points="7 7 15.586 7 5.293 17.293 6.707 18.707 17 8.414 17 17 19 17 19 5 7 5 7 7"/></svg></div>`;
-            newsListBox.appendChild(htmlToElement(htmlNewsTxtString));
+        taxiListBox.innerHTML = "";
+        taxiImgBox.innerHTML = "";
+        for (let i = 0; i < 4 && i < taxi.length; i++) {
+            let taxiItem = taxi[i];
+            let htmlTaxiTxtString = `<div class="taxi-item" data-idx="${i}"><div class="taxi-item-title">${taxiItem.title}</div><div class="taxi-item-txt">${taxiItem.excerpt}</div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><polygon points="7 7 15.586 7 5.293 17.293 6.707 18.707 17 8.414 17 17 19 17 19 5 7 5 7 7"/></svg></div>`;
+            taxiListBox.appendChild(htmlToElement(htmlTaxiTxtString));
 
-            // let htmlNewsImgString = `<div class="news-img" style={"background-image: url("${newsItem.image}")"}></div>`;
-            newsImgBox.innerHTML = `${newsImgBox.innerHTML}<div class="news-img" style='background-image: url(${newsItem.image});'></div>`;
+            // let htmlTaxiImgString = `<div class="taxi-img" style={"background-image: url("${taxiItem.image}")"}></div>`;
+            taxiImgBox.innerHTML = `${taxiImgBox.innerHTML}<div class="taxi-img" style='background-image: url(${taxiItem.image});'></div>`;
         }
-        newsSelect(0);
+        */
+        taxiSelect(0);
 
         addEvent();
     }
 
-    loadNews();
+    loadTaxi();
 
 </script>
 
 <style lang="scss" is:global>
-    .news-wr {
+    .taxi-wr {
         background-color: var(--clr-light);
 
         padding-left: 90px;
@@ -156,35 +164,47 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
             padding-right: 25px;
         }
 
-        .news {
+        .taxi {
             height: 80vh;
             min-height: 440px;
 
             padding-top: 55px;
             padding-bottom: 55px;
 
-            .news-box {
+            .taxi-box {
                 height: 100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
 
-                .news-list {
+                .taxi-list {
                     width: 50%;
+                    font-family: "BrandonGrotesque";
 
-                    .news-list-title {
-                        font-size: 16px;
+                    .taxi-list-head {
                         font-weight: bold;
                         color: var(--clr-medium);
+                        font-size: 15px;
+                        margin-bottom: 10px;
                     }
 
-                    .news-list-items {
-                        padding: 0 20px 10px 0;
+                    .taxi-list-title {
+                        font-size: 30px;
+                        font-weight: bold;
+                        color: var(--clr-dark);
+                    }
 
-                        .news-item {
+                    .taxi-list-items {
+                        padding: 20px 20px 20px 0;
+
+                        display: flex;
+                        flex-direction: column;
+                        align-items: baseline;
+
+                        .taxi-item {
                             display: block;
                             position: relative;
-                            padding: 20px 130px 20px 0;
+                            padding: 20px 110px 20px 0;
 
                             font-weight: bold;
 
@@ -195,14 +215,13 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
 
                             transition: all .7s;
 
-                            .news-item-title {
-                                font-size: 16px;
-                                //font-family: BrandonGrotesque;
+                            .taxi-item-title {
+                                font-size: 22px;
                             }
 
-                            .news-item-txt {
+                            .taxi-item-txt {
                                 font-family: BrandonGrotesque;
-                                font-size: 13px;
+                                font-size: 14px;
                                 font-weight: normal;
                             }
 
@@ -210,7 +229,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                                 position: absolute;
                                 height: 30px;
                                 transform: rotate(45deg);
-                                right: 90px;
+                                right: 50px;
                                 top: 0;
                                 bottom: 0;
                                 margin: auto;
@@ -224,7 +243,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                                 color: var(--clr-darker);
 
                                 svg {
-                                    right: 40px;
+                                    right: 30px;
                                     color: var(--clr-darker);
                                 }
                             }
@@ -245,18 +264,24 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                         }
                     }
 
-                    .news-list-btn-row {
+                    .taxi-list-btn-row {
                         display: flex;
+
+                        /*
+                        .btn svg {
+                            transform: rotate(45deg);
+                        }
+                        */
                     }
                 }
 
-                .news-img-box {
+                .taxi-img-box {
                     width: 50%;
                     height: 100%;
 
                     position: relative;
 
-                    .news-img {
+                    .taxi-img {
                         position: absolute;
 
                         $offset: 30px;
@@ -280,45 +305,45 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                             right: 0;
                         }
 
-                        &.news-img-1 {
+                        &.taxi-img-1 {
                             background-image: url("/img/news1.jpg");
                         }
 
-                        &.news-img-2 {
+                        &.taxi-img-2 {
                             background-image: url("/img/news2.jpeg");
                         }
 
-                        &.news-img-3 {
+                        &.taxi-img-3 {
                             background-image: url("/img/news3.jpg");
                         }
 
-                        &.news-img-4 {
+                        &.taxi-img-4 {
                             background-image: url("/img/news4.jpg");
                         }
                     }
                 }
             }
 
-            .news-box-btn-row {
+            .taxi-box-btn-row {
                 display: none;
             }
 
             @media only screen and (max-width: 1000px) {
                 height: 90vh;
 
-                .news-box {
+                .taxi-box {
                     flex-direction: column;
 
-                    .news-list {
+                    .taxi-list {
                         width: 100%;
 
-                        .news-list-items {
+                        .taxi-list-items {
                             padding-right: 0;
                             position: relative;
                             height: 80px;
                             overflow: hidden;
 
-                            .news-item {
+                            .taxi-item {
                                 position: absolute;
                                 top: 0;
                                 opacity: 0;
@@ -336,21 +361,21 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                             }
                         }
 
-                        .news-list-btn-row {
+                        .taxi-list-btn-row {
                             display: none;
                         }
                     }
 
-                    .news-img-box {
+                    .taxi-img-box {
                         width: 100%;
 
-                        .news-img {
+                        .taxi-img {
                             transition: all .3s;
                         }
                     }
                 }
 
-                .news-box-btn-row {
+                .taxi-box-btn-row {
                     margin-top: 16px;
                     padding: 0 15px;
                     display: flex;
@@ -363,13 +388,13 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                         cursor: pointer;
                     }
 
-                    .news-btn-prev {
+                    .taxi-btn-prev {
                         svg {
                             transform: rotate(-135deg);
                         }
                     }
 
-                    .news-btn-next {
+                    .taxi-btn-next {
                         svg {
                             transform: rotate(45deg);
                         }

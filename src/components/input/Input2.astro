@@ -1,4 +1,5 @@
 ---
+import IconArrowShort from "../icons/IconArrowShort.astro";
 interface Props {
     label: string;
     idx: string;
@@ -9,10 +10,12 @@ const {label, idx} = Astro.props;
 
 <div class="input-field">
     <input placeholder={label} name={idx} type="text" required>
+    <IconArrowShort/>
     <!--<label for={idx}>{label}</label>-->
 </div>
 
 <style lang="scss" is:global>
+
     .input-field {
         position: relative;
 
@@ -24,10 +27,24 @@ const {label, idx} = Astro.props;
             font-family: BrandonGrotesque;
             font-size: 16px;
             padding: 10px;
+            padding-right: 30px;
 
-            &:focus{
+            width: 100%;
+
+            &:focus {
                 outline: none;
             }
+        }
+
+        svg {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            transform: rotate(45deg);
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            right: 10px;
         }
     }
 
