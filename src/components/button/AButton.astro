@@ -2,23 +2,45 @@
 interface Props {
     btnType?: 'white' | 'transparent';
     linkUrl?: string;
-    click?: () => {}
+    clickCallback?: () => {};
+    uid?: string;
+    goToSel?: string
 }
 
-const {btnType = 'black', linkUrl, click} = Astro.props;
+const {btnType = 'black', linkUrl, clickCallback, uid, goToSel} = Astro.props;
 ---
 
-{linkUrl?
-<a href={linkUrl} target="_blank" class={"btn btn-" + btnType}>
-    <slot/>
-</a>
-    :
-<div class={"btn btn-" + btnType}>
-    <slot/>
-</div>
+<astro-button data-gotosel={goToSel}>
+    {linkUrl ?
+            <a id={uid} href={linkUrl} target="_blank" class={"btn btn-" + btnType}>
+                <slot/>
+            </a>
+        :
+            <div id={uid} class={"btn btn-" + btnType}>
+                <slot/>
+            </div>
     }
+</astro-button>
 
 <script>
+    class AstroButton extends HTMLElement {
+        constructor() {
+            super();
+            let count = 0;
+
+            const aBtn = this.querySelector('div.btn');
+            const goToSelector = this.dataset.gotosel;
+
+            aBtn.addEventListener('click', () => {
+                if (goToSelector) {
+                    goTo(goToSelector);
+                }
+            });
+        }
+    }
+
+    // Tell the browser to use our AstroHeart class for <astro-heart> elements.
+    customElements.define('astro-button', AstroButton);
 
 </script>
 

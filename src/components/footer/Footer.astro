@@ -1,27 +1,28 @@
 ---
 import Button from "../button/Button.astro";
+import AButton from "../button/AButton.astro";
 import IconArrowShort from "../icons/IconArrowShort.astro";
 ---
 <div class="footer">
     <div class="footer-left">
         <div class="footer-nav">
             <div>
-                <Button btnType="black">ABOUT</Button>
+                <AButton uid="btn-about" btnType="black" goToSel=".slider">ABOUT</AButton>
             </div>
             <div>
-                <Button btnType="black">TAXI</Button>
+                <AButton btnType="black" goToSel=".taxi-box">TAXI</AButton>
             </div>
             <div>
-                <Button btnType="black">IMPACT</Button>
+                <AButton uid="btn-impact" btnType="black" goToSel=".slider">IMPACT</AButton>
             </div>
             <div>
-                <Button btnType="black">B CORP</Button>
+                <AButton btnType="black" goToSel=".bcorp-wr">B CORP</AButton>
             </div>
             <div>
-                <Button btnType="black">VIDEO</Button>
+                <AButton btnType="black" goToSel=".video">VIDEO</AButton>
             </div>
             <div>
-                <Button btnType="black">NEWS</Button>
+                <AButton btnType="black" goToSel=".news-box">NEWS</AButton>
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 ---
 import Button from "../button/Button.astro";
+import AButton from "../button/AButton.astro";
 ---
 
 <div class="header">
@@ -58,16 +59,16 @@ import Button from "../button/Button.astro";
             <img src="/img/logo.svg" class="filter-green" />
         </div> -->
         <div class="header-links-box">
-            <Button btnType="transparent">ABOUT</Button>
-            <Button btnType="transparent">VIDEO</Button>
-            <Button btnType="transparent">NEWS</Button>
-            <Button btnType="transparent">CONTACT</Button>
+            <AButton btnType="transparent" goToSel=".slider">ABOUT</AButton>
+            <AButton btnType="transparent" goToSel=".video">VIDEO</AButton>
+            <AButton btnType="transparent" goToSel=".news-box">NEWS</AButton>
+            <AButton btnType="transparent" goToSel=".signup">CONTACT</AButton>
         </div>
-<!--
-        <div class="contact-btn-box">
-            <Button>Contact Us</Button>
-        </div>
--->
+        <!--
+                <div class="contact-btn-box">
+                    <Button>Contact Us</Button>
+                </div>
+        -->
     </div>
 </div>
 
@@ -160,5 +161,36 @@ import Button from "../button/Button.astro";
                 }
             }
         }
+    }
+
+    .header.dark {
+        background-color: var(--clr-dark);
+    }
+
+    .header.transparent,
+    .header.white {
+        background-color: #fff;
+
+        .header-box {
+            .logo {
+                svg {
+                    color: var(--clr-dark);
+                }
+            }
+        }
+
+        .header-links-box {
+            .btn {
+                color: var(--clr-dark);
+
+                &:hover {
+                    color: var(--clr-light);
+                }
+            }
+        }
+    }
+
+    .header.transparent {
+        background-color: rgba(255, 255, 255, .7);
     }
 </style>
