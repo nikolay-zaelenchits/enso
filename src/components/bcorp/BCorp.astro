@@ -7,7 +7,8 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
     <div class="bcorp-txt">ENSO is the only Certified B-Corporation in the tire industry</div>
     <div class="bcorp-btn-row">
         <Button btnType="white" linkUrl="https://www.bcorporation.net/en-us/find-a-b-corp/company/enso/">
-            Find out more <IconArrowShort/>
+            Find out more
+            <IconArrowShort/>
         </Button>
     </div>
 </div>
@@ -20,15 +21,23 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
 
         .bcorp-txt {
             font-size: 44px;
-            /*font-family: "Brandon";*/
+            font-size: max(min(3.3vw, 44px), 20px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             font-family: "BrandonGrotesque";
             color: var(--clr-lightest);
+
+            @media only screen and (max-width: 1100px) {
+                white-space: normal;
+            }
         }
 
         .bcorp-btn-row {
+            margin-top: 20px;
             display: flex;
 
-            .btn.btn-white:hover{
+            .btn.btn-white:hover {
                 border-color: var(--clr-lightest);
             }
 

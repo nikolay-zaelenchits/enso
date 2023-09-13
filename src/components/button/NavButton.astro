@@ -1,0 +1,166 @@
+---
+interface Props {
+    btnType?: 'white' | 'transparent';
+    linkUrl?: string;
+    clickCallback?: () => {};
+    uid?: string;
+    goToSel?: string
+}
+
+const {btnType = 'black', linkUrl, clickCallback, uid, goToSel} = Astro.props;
+---
+
+<nav-button data-gotosel={goToSel}>
+    {linkUrl ?
+            <a id={uid} href={linkUrl} target="_blank" class={"nbtn nbtn-" + btnType}>
+                <slot/>
+            </a>
+        :
+            <div id={uid} class={"nbtn nbtn-" + btnType}>
+                <slot/>
+            </div>
+    }
+</nav-button>
+
+<script>
+    class NavButton extends HTMLElement {
+        constructor() {
+            super();
+            let count = 0;
+
+            const aBtn = this.querySelector('div.nbtn');
+            const goToSelector = this.dataset.gotosel;
+
+            aBtn.addEventListener('click', () => {
+                if (goToSelector) {
+                    goTo(goToSelector);
+                }
+            });
+        }
+    }
+
+    // Tell the browser to use our AstroHeart class for <astro-heart> elements.
+    customElements.define('nav-button', NavButton);
+
+</script>
+
+<style lang="scss" is:global>
+    :root {
+        --btn-clr-dark: var(--clr-dark);
+        --btn-clr-light: var(--clr-light);
+        --btn-clr-med: var(--clr-medium);
+    }
+
+
+    .nbtn {
+        cursor: pointer;
+        font-family: BrandonGrotesque;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 20px;
+
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+
+        -webkit-transition: color 0.3s;
+        transition: color 0.3s;
+        border: 1px solid;
+        border-color: var(--btn-clr-dark);
+
+        user-select: none;
+
+        display: flex;
+        white-space: nowrap;
+
+        text-decoration: none;
+
+        svg {
+            width: 16px;
+            margin-left: 20px;
+            transform: rotate(45deg);
+        }
+
+        //&::before,
+        &::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            //bottom: 100%;
+            //left: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0;
+            //-webkit-transition: -webkit-transform 0.3s;
+            transition: opacity 0.7s;
+            //-webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+            //transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+        }
+
+        //&::before {
+        //    background-color: var(--btn-clr-med);
+        //}
+
+        //&:hover::before,
+        &:hover::after {
+            //-webkit-transform: translate3d(-100%, 0, 0);
+            //transform: translate3d(-100%, 0, 0);
+        }
+
+        &:hover::after {
+            //-webkit-transition-delay: 0.175s;
+            //transition-delay: 0.175s;
+            opacity: .9;
+        }
+
+        &.nbtn-black {
+            color: var(--btn-clr-light);
+            background-color: var(--btn-clr-dark);
+
+            &::after {
+                background-color: var(--btn-clr-light);
+                color: var(--btn-clr-dark);
+            }
+
+            &:hover {
+                color: var(--btn-clr-dark);
+            }
+        }
+
+        &.nbtn-white {
+            color: var(--btn-clr-dark);
+            border: 1px solid;
+            border-color: var(--btn-clr-dark);;
+            background-color: var(--btn-clr-light);
+
+            &::after {
+                background-color: var(--btn-clr-dark);
+                color: var(--btn-clr-light);
+            }
+
+            &:hover {
+                color: var(--btn-clr-light);
+            }
+        }
+
+        &.nbtn-transparent {
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--btn-clr-light);
+            background-color: transparent;
+
+            &::after {
+                border-color: var(--btn-clr-dark);
+                background-color: var(--btn-clr-dark);
+                color: var(--btn-clr-light);
+            }
+
+            &:hover {
+                color: var(--btn-clr-light);
+            }
+        }
+    }
+
+</style>

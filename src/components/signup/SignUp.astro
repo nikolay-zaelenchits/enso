@@ -1,38 +1,23 @@
 ---
 import Button from "../button/Button.astro";
-import Input from "../input/Input.astro";
+import Input2 from "../input/Input2.astro";
 ---
 
 <div class="signup">
     <div class="signup-content">
         <div class="signup-social">
-            <div class="signup-social-title">SIGN UP</div>
+            <div class="signup-social-title">RECEIVE OUR NEWSLETTER</div>
             <div class="signup-social-txt">Sign up to the ENSO Memo to get our latest news and updates, keeping you in the loop about our activities, events and latest innovations. For more frequent updates please follow us on social media.</div>
-            <div class="signup-social-icons">
-                <a class="signup-social-icon signup-social-icon-f" href="https://www.facebook.com/ensotyres/" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50" fill="currentColor">
-                        <path d="M32,11h5c0.552,0,1-0.448,1-1V3.263c0-0.524-0.403-0.96-0.925-0.997C35.484,2.153,32.376,2,30.141,2C24,2,20,5.68,20,12.368 V19h-7c-0.552,0-1,0.448-1,1v7c0,0.552,0.448,1,1,1h7v19c0,0.552,0.448,1,1,1h7c0.552,0,1-0.448,1-1V28h7.222 c0.51,0,0.938-0.383,0.994-0.89l0.778-7C38.06,19.518,37.596,19,37,19h-8v-5C29,12.343,30.343,11,32,11z"></path>
-                    </svg>
-                </a>
-                <a class="signup-social-icon signup-social-icon-x" href="https://twitter.com/ensotyres" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48" fill="currentColor">
-                        <path fill="#000" fill-rule="evenodd" d="M38,42H10c-2.209,0-4-1.791-4-4V10c0-2.209,1.791-4,4-4h28	c2.209,0,4,1.791,4,4v28C42,40.209,40.209,42,38,42z" clip-rule="evenodd"></path>
-                        <path fill="#fff" d="M34.257,34h-6.437L13.829,14h6.437L34.257,34z M28.587,32.304h2.563L19.499,15.696h-2.563 L28.587,32.304z"></path>
-                        <polygon fill="#fff" points="15.866,34 23.069,25.656 22.127,24.407 13.823,34"></polygon>
-                        <polygon fill="#fff" points="24.45,21.721 25.355,23.01 33.136,14 31.136,14"></polygon>
-                    </svg>
-                </a>
-            </div>
         </div>
         <div class="signup-form">
-            <Input label="EMAIL"/>
-            <Input label="REGION"/>
-            <div class="signup-btn-row">
-                <Button>Contact Us</Button>
+            <div class="signup-form-field">
+                <Input2 idx="email" label="Enter your email address"/>
             </div>
-            <div class="signup-form-txt">
-                By signing up to this ENSO MEMO you agree to our <a href="#">terms &amp; conditions</a>
-            </div>
+            <!--
+                <div class="signup-btn-row">
+                            <Button>Contact Us</Button>
+                        </div>
+                        -->
         </div>
     </div>
 </div>
@@ -45,79 +30,35 @@ import Input from "../input/Input.astro";
         padding-top: 120px;
         padding-bottom: 120px;
 
-        background-color: #deeaf1;
+        background-color: var(--clr-main);
 
         .signup-content {
             display: flex;
             align-items: center;
 
-            & > div {
-                width: 50%;
-            }
-
             .signup-social {
                 padding-right: 10%;
 
+                width: 60%;
+
                 & > div {
-                    margin-top: 25px;
-                    margin-bottom: 25px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
                 }
 
+                font-family: BrandonGrotesque;
+
                 .signup-social-title {
-                    font-size: 36px;
+                    font-size: 20px;
                     font-weight: bold;
+
+                    color: var(--clr-lightest);
                 }
 
                 .signup-social-txt {
-                    font-size: 14px;
-                }
-
-                .signup-social-icons {
-                    display: flex;
-
-                    .signup-social-icon {
-                        display: block;
-                        text-decoration: none;
-                        color: var(--clr-lightest);
-                        //background-color: var(--clr-darker);
-                        cursor: pointer;
-
-                        font-size: 30px;
-                        line-height: 57px;
-                        text-align: center;
-
-                        height: 60px;
-                        width: 60px;
-                        border-radius: 50%;
-
-                        margin-right: 10px;
-
-                        background-position: center center;
-                        background-size: cover;
-
-                        background-color: var(--clr-darker);
-                        color: var(--clr-lightest);
-
-
-                        &.signup-social-icon-f {
-                            //background-image: url("/img/facebook1.png");
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-
-                            svg {
-                                height: 60%;
-                            }
-
-                        }
-
-                        &.signup-social-icon-x {
-                            //background-image: url("/img/x.png");
-                            svg {
-                                height: 100%;
-                            }
-                        }
-                    }
+                    font-size: 17px;
+                    //font-weight: bold;
+                    color: var(--clr-lightest);
                 }
             }
 
@@ -125,16 +66,14 @@ import Input from "../input/Input.astro";
                 display: flex;
                 flex-direction: column;
 
+                width: 40%;
+
                 > div {
-                    margin: 20px 0;
+                    margin: 10px 0;
                 }
 
                 .signup-form-field {
-                    background-color: var(--clr-lightest);
-                    font-weight: bold;
-                    padding: 20px;
-                    margin-top: 20px;
-                    font-size: 13px;
+                    width: 60%;
                 }
 
                 .signup-btn-row {
@@ -143,16 +82,6 @@ import Input from "../input/Input.astro";
                     display: flex;
                 }
 
-                .signup-form-txt {
-                    font-size: 14px;
-
-                    a {
-                        &,
-                        &:visited {
-                            color: var(--clr-darker);
-                        }
-                    }
-                }
             }
         }
 
@@ -165,7 +94,12 @@ import Input from "../input/Input.astro";
 
             .signup-content {
                 .signup-social {
+                    width: auto;
                     padding-right: 25px;
+                }
+
+                .signup-form {
+                    width: 100%;
                 }
             }
         }

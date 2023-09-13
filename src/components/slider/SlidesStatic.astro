@@ -25,58 +25,22 @@ import Slide from "./Slide.astro";
                 Globally, tires emit 6 million tons of pollution each year<sup>1</sup>. More air pollution is generated from tires that tailpipes<sup>2</sup>. Tire dust represents 28% of promary microplastics floating in our oceans<sup>3</sup>.
             </p>
             <div class="slide-links">
-                <a href="https://www.imperial.ac.uk/news/243333/prioritise-tackling-toxic-emissions-from-tyres/" target="_blank"><sup>1</sup>Imperial College London, 2023.</a>
-                <a href="https://uk-air.defra.gov.uk/assets/documents/reports/cat09/1907101151_20190709_Non_Exhaust_Emissions_typeset_Final.pdf" target="_blank"><sup>2</sup>DEFRA, UK Government, 2019.</a>
-                <a href="https://www.iucn.org/news/secretariat/201702/invisible-plastic-particles-textiles-and-tyres-major-source-ocean-pollution-%E2%80%93-iucn-study" target="_blank"><sup>3</sup>IUCN, 2017.</a>
+                <div>
+                    <sup>1</sup><a href="https://www.imperial.ac.uk/news/243333/prioritise-tackling-toxic-emissions-from-tyres/" target="_blank">Imperial College London, 2023.</a>
+                </div>
+                <div>
+                    <sup>2</sup><a href="https://uk-air.defra.gov.uk/assets/documents/reports/cat09/1907101151_20190709_Non_Exhaust_Emissions_typeset_Final.pdf" target="_blank">DEFRA, UK Government, 2019.</a>
+                </div>
+                <div>
+                    <sup>3</sup><a href="https://www.iucn.org/news/secretariat/201702/invisible-plastic-particles-textiles-and-tyres-major-source-ocean-pollution-%E2%80%93-iucn-study" target="_blank">IUCN, 2017.</a>
+                </div>
             </div>
 
         </Slide>
 
-        <!--
-               <Slide
-                        title="ABOUT ENSO"
-                        txt="ENSO is developing sustainable tyres for electric vehicles, delivering sustainable mobility by improving the performance and environmental impact of tyres."
-                        imgUrl={"/enso/img/news2.jpeg"}>
-                    <p>
-                        All tires wear down, creating air pollution. Most tires are also inefficient, limiting range.
-                    </p>
-                    <p>
-                        ENSO is atire technology company that makes better tires for electric vehicles, to extend EV range and reduce tire pollution.
-                    </p>
-                </Slide>
-                <Slide
-                        title="WHAT IS TIRE POLLUTION?"
-                        txt="ENSO is driven by sustainability and creating a balance in how we live and move – today and tomorrow. This belief is central to how we act, design and make our products, and how we build our business."
-                        imgUrl={"/enso/img/slide2.png"}
-                >
-                    <img src="/enso/img/slide2.png"/>
-                </Slide>
-
-
-               <Slide
-                        title="SOME MORE"
-                        txt="ENSO is looking to deliver tyres with uncompromised performance, without passing the cost to drivers or the environment, moving electric vehicles to a truly sustainable future."
-                        imgUrl={"/enso/img/slide4.png"}
-                >
-                    <img src="/enso/img/slide4.png"/>
-                </Slide>
-
-                <Slide
-                        title="THE MEANING OF ENSO"
-                        txt="We are often asked why we named our company ENSO. An ‘ensō’ in Zen Buddhism means a hand-drawn circle, created in a single brushstroke that symbolises strength, elegance, and the circularity of nature. Creating an ‘ensō’ circle relies on both concentration and mindfulness, clearing your mind while being fully present in the moment. When painted with black pigment, an ‘ensō’ also looks very much like a tyre. As a company developing a circular business model for tyres, we felt that ENSO gave us a clean and holistic tyre brand that symbolised that we are looking to work in harmony with nature, to bring together sustainability and better performance for electric vehicles. Ultimately it is vital that we take better care of our nature, people and planet, to find a balanced way of living. We would love you to join us on this journey and become part of our circle"
-                        imgUrl={"/enso/img/slide3.png"}
-                >
-                    <img src="/enso/img/slide3.png"/>
-                </Slide>-->
-
-
         <div class="slider-controls">
             <div data-idx="0"></div>
             <div data-idx="1"></div>
-            <!--
-                        <div data-idx="2"></div>
-                        <div data-idx="3"></div>
-            -->
         </div>
 
     </div>
@@ -178,7 +142,7 @@ import Slide from "./Slide.astro";
 
         const slider = document.getElementById('slider');
         const slides = slider.querySelectorAll(slidesSelector);
-        slides.forEach(s=>{
+        slides.forEach(s => {
             s.classList.add(playClsIn);
         });
     }
@@ -262,6 +226,10 @@ import Slide from "./Slide.astro";
             &:nth-child(even) {
                 background-color: var(--clr-dark);
                 color: var(--clr-light);
+
+                .slide .slide-txt-box .slide-title {
+                    color: var(--clr-light);
+                }
             }
 
             .slide {
@@ -272,13 +240,6 @@ import Slide from "./Slide.astro";
 
                 display: flex;
                 justify-content: space-between;
-                /*align-items: center;*/
-
-                /*padding-left: 90px;*/
-                /*padding-right: 90px;*/
-
-                /*padding-top: 55px;*/
-                /*padding-bottom: 75px;*/
 
                 .slide-txt-box {
                     width: 30%;
@@ -301,22 +262,33 @@ import Slide from "./Slide.astro";
 
                     .slide-txt {
                         font-family: BrandonGrotesque;
-                        font-size: 24px;
-                        font-weight: bold;
+                        font-size: 30px;
                         flex-grow: 1;
                         position: relative;
 
                         display: flex;
                         flex-direction: column;
 
+                        p {
+                            margin-top: 15px;
+                            margin-bottom: 15px;
+                        }
+
                         .slide-links {
                             margin-top: auto;
 
+                            font-size: 16px;
+
+                            sup {
+                                display: inline;
+                                margin-right: 5px;
+                            }
+
                             a {
-                                display: block;
+                                text-transform: uppercase;
+                                display: inline;
                                 color: var(--clr-light);
                                 font-weight: normal;
-                                font-size: 16px;
                             }
                         }
                     }

@@ -9,29 +9,27 @@ import Video from "../components/video/Video.astro";
 import Taxi from "../components/taxi/Taxi.astro";
 import NewsMobile from "../components/news/NewsMobile.astro";
 import Team from "../components/team/Team.astro";
-import SignUp2 from "../components/signup/SignUp2.astro";
+import SignUp from "../components/signup/SignUp.astro";
 import Footer from "../components/footer/Footer.astro";
+import SlidesStatic from "../components/slider/SlidesStatic.astro";
 ---
 
 <Layout title="Enso">
     <Header/>
     <main>
         <Hero/>
-        <Slider3/>
+        <SlidesStatic/>
         <Video/>
         <Taxi/>
         <BCorp/>
         <NewsMobile/>
-        <!--<Team/>-->
-        <SignUp2/>
+        <SignUp/>
     </main>
     <Footer/>
 
     <style lang="scss" is:global>
-        /*
         div {
-            border: 1px solid red;
+            //border: 1px solid red;
         }
-        */
     </style>
 </Layout>
