@@ -9,7 +9,7 @@ const {label, idx} = Astro.props;
 ---
 
 <div class="input-field">
-    <input placeholder={label} name={idx} type="text" required>
+    <input id={idx} placeholder={label} name={idx} type="text" required>
     <IconArrowShort/>
     <!--<label for={idx}>{label}</label>-->
 </div>

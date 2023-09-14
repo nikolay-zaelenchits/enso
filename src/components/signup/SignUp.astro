@@ -11,7 +11,15 @@ import Input2 from "../input/Input2.astro";
         </div>
         <div class="signup-form">
             <div class="signup-form-field">
-                <Input2 idx="email" label="Enter your email address"/>
+                <Input2 idx="email-field" label="Enter your email address"/>
+            </div>
+            <div class="signup-form-result">
+                <div class="signup-form-result-ok">
+                    Thank you!
+                </div>
+                <div class="signup-form-result-err">
+                    Something went wrong...
+                </div>
             </div>
             <!--
                 <div class="signup-btn-row">
@@ -21,11 +29,109 @@ import Input2 from "../input/Input2.astro";
         </div>
     </div>
 
-<!--
-{"list_ids":["e03f823e-448d-4b64-8b61-f07829ce1a38"],"contacts":[{"email":"n.zaelenchits@reply.com","custom_fields":{"e3_T":"euregion"},"app":"enso"}]}
--->
+    <!--
+    {"list_ids":["e03f823e-448d-4b64-8b61-f07829ce1a38"],"contacts":[{"email":"n.zaelenchits@reply.com","custom_fields":{"e3_T":"euregion"},"app":"enso"}]}
+    -->
 
 </div>
+
+<script is:inline>
+
+    const eField = document.getElementById('email-field');
+    const eFieldBox = document.querySelector('.signup-form-field');
+    const eFieldBtn = document.querySelector('.signup-form-field svg');
+    const formOk = document.querySelector('.signup-form-result-ok');
+    const formErr = document.querySelector('.signup-form-result-err');
+
+    const isEmailValid = (email) => {
+        return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
+    }
+
+    const subscribe = async () => {
+        const email = eField.value;
+        if (!isEmailValid(email)) {
+            return;
+        }
+
+        const CONSTANTS = {
+            SENDGRID_MARKETING_URL: 'https://api.sendgrid.com/v3/marketing/contacts',
+            SENDGRID_MARKETING_KEY: 'Bearer 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',
+            MEMO_LIST_ID: 'e03f823e-448d-4b64-8b61-f07829ce1a38',
+        }
+
+        try {
+            const response = await fetch(CONSTANTS.SENDGRID_MARKETING_URL, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: CONSTANTS.SENDGRID_MARKETING_KEY,
+                },
+                body: JSON.stringify({
+                    list_ids: [CONSTANTS.MEMO_LIST_ID],
+                    contacts: [
+                        {
+                            email: email,
+                            // custom_fields: {
+                            //     [CONSTANTS.SENDGRID_MEMO_VALUE_FIELD_ID]: values.region
+                            // },
+                            app: 'enso'
+                        }
+                    ]
+                }),
+            })
+            const subscription = await response.json()
+            if (subscription) {
+                console.log('subscription OK');
+                console.log(subscription);
+
+                formOk.classList.add('play');
+                setTimeout(() => {
+                    formOk.classList.remove('play');
+                }, 5000);
+                eField.value = "";
+                emailFieldEvent();
+                return;
+
+            } else {
+                console.log('subscription FAIL');
+                console.log(response);
+            }
+        } catch (error) {
+            console.log('subscription ERR');
+            console.log(error);
+        }
+
+        formErr.classList.add('play');
+        setTimeout(() => {
+            formErr.classList.remove('play');
+        }, 5000);
+    }
+
+    const emailFieldEvent = () => {
+        eFieldBox.classList.remove('valid');
+        eFieldBox.classList.remove('error');
+
+        const email = eField.value;
+        if (!email) {
+            return;
+        }
+
+        if (isEmailValid(email)) {
+            eFieldBox.classList.add('valid');
+        } else {
+            eFieldBox.classList.add('error');
+        }
+    }
+
+    eField.addEventListener('keyup', () => {
+        emailFieldEvent();
+    });
+
+    eFieldBtn.addEventListener('click', () => {
+        subscribe();
+    });
+
+</script>
 
 <style lang="scss" is:global>
     .signup {
@@ -79,6 +185,24 @@ import Input2 from "../input/Input2.astro";
 
                 .signup-form-field {
                     width: 60%;
+
+                    &.error {
+                        svg {
+                            transform: rotate(-135deg);
+                            color: darkred;
+                        }
+                    }
+
+                    &.valid {
+                        svg {
+                            color: var(--clr-main);
+                            height: 27px;
+                            width: 27px;
+                            border: 1px solid var(--clr-main);
+                            border-radius: 3px;
+                            cursor: pointer;
+                        }
+                    }
                 }
 
                 .signup-btn-row {
@@ -86,6 +210,22 @@ import Input2 from "../input/Input2.astro";
                     margin-bottom: 20px;
                     display: flex;
                 }
+
+                .signup-form-result {
+                    position: relative;
+
+                    .signup-form-result-err,
+                    .signup-form-result-ok {
+                        color: var(--clr-lightest);
+                        font-size: 0;
+                        position: absolute;
+
+                        &.play {
+                            font-size: 16px;
+                        }
+                    }
+                }
+
             }
         }
 
