@@ -24,7 +24,9 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                     -->
                 </div>
                 <div class="news-list-btn-row">
-                    <Button>View All <IconArrowShort/></Button>
+                    <Button linkUrl="/enso/news" targetBlank={false}>View All
+                        <IconArrowShort/>
+                    </Button>
                 </div>
             </div>
             <div id="news-img-box" class="news-img-box">
@@ -129,7 +131,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
         newsImgBox.innerHTML = "";
         for (let i = 0; i < 4 && i < news.length; i++) {
             let newsItem = news[i];
-            let htmlNewsTxtString = `<div class="news-item" data-idx="${i}"><div class="news-item-title">${newsItem.title}</div><div class="news-item-txt">${newsItem.excerpt}</div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><polygon points="7 7 15.586 7 5.293 17.293 6.707 18.707 17 8.414 17 17 19 17 19 5 7 5 7 7"/></svg></div>`;
+            let htmlNewsTxtString = `<a href="/enso/news?aid=${newsItem.id}" target="_self" class="news-item" data-idx="${i}"><div class="news-item-title">${newsItem.title}</div><div class="news-item-txt">${newsItem.excerpt}</div><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><polygon points="7 7 15.586 7 5.293 17.293 6.707 18.707 17 8.414 17 17 19 17 19 5 7 5 7 7"/></svg></a>`;
             newsListBox.appendChild(htmlToElement(htmlNewsTxtString));
 
             // let htmlNewsImgString = `<div class="news-img" style={"background-image: url("${newsItem.image}")"}></div>`;
@@ -184,6 +186,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                         display: flex;
                         flex-direction: column;
                         align-items: start;
+                        width: 100%;
 
                         .news-item {
                             display: block;
@@ -323,7 +326,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                         .news-list-items {
                             padding-right: 0;
                             position: relative;
-                            height: 80px;
+                            height: 130px;
                             overflow: hidden;
 
                             .news-item {
@@ -351,6 +354,8 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
 
                     .news-img-box {
                         width: 100%;
+                        height: auto;
+                        flex-grow: 1;
 
                         .news-img {
                             transition: all .3s;

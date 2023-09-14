@@ -1,0 +1,170 @@
+---
+import Button from "../button/Button.astro";
+import IconArrowShort from "../icons/IconArrowShort.astro";
+---
+
+<div class="news-page">
+    <div class="news-page-header-row">
+        <div class="news-page-header-box">
+            <div class="news-page-date">24. Jun 2023</div>
+            <div class="news-page-title">FORBES FEATURES ENSO'S CALL FOR BETTER EV TIRES</div>
+        </div>
+        <div class="news-page-img-box">
+            <img class="news-page-img" src="/enso/img/news1.jpg"/>
+        </div>
+    </div>
+    <div class="news-page-content-row">
+        Forbes has featured ENSO's innovation, highlighting how more efficient, less polluting tires are essential for EVs.\r\n
+        <p class="p1"></p>\r\n“No tire will last forever, but we can make them a lot better than they are made today. Carmakers can engineer vehicles to reduce tire wear, they can make them less heavy, reduce the torque or change the size of the tire. However, while the tire on a new vehicle has been engineered with the OEM’s approval, there's no control what happens in the aftermarket.”\r\n
+        <p class="p1"></p>\r\n“Tire pollution is very serious,” says Erlendsson. “We're exposed to more PM 2.5 and PM 10 dust from tires than tailpipes, but where's the regulation against that? The Euro 7 regulation is flawed because it only applies to new vehicles, not the tire aftermarket. It's also flawed because the level will probably be put where it will be easy for the top tier tire manufacturers to achieve. They cannot even agree today how they're going to create the tire wear mechanism measurements, nor where the level of the pass-fail will be set. So unlike energy efficiency and safety or noise, there's no rating. It'll either be good or bad, but it'll only be good or bad for new vehicles. It won't take care of the problem for the aftermarket, which is 80% of the volume. So we're still going to be faced with cheap imports of inferior products.”\r\n
+        <p class="p1"></p>\r\n“Ultimately, altruism is great, but you need to make it profitable,” concludes Erlendsson. “If the raw materials for more efficient tires are fundamentally more expensive, you can only pivot to these materials if you change the underlying business model. The top tiers choose not to do this because it's not economic for them to do so, rather than because it's technologically challenging. They don't do it because they can't make it as profitable as the current status quo.”\r\n
+        <p class="p1"></p>\r\n<a href="https://www.forbes.com/sites/jamesmorris/2023/06/24/more-efficient-less-polluting-tires-are-essential-for-electric-vehicles-says-enso/?sh=19a5f9efee2f" rel="noopener" target="_blank">FORBES - JUNE 2023</a>
+    </div>
+</div>
+
+<div class="news-page-list">
+
+</div>
+
+
+<script>
+    async function fetchAsync(url) {
+        let response = await fetch(url);
+        let data = await response.json();
+        return data;
+    }
+
+    const getUrlParam = (name: string) => {
+        const params = new URLSearchParams(document.location.search);
+        if (params.has(name))
+            return params.get(name);
+        return null;
+    }
+    const loadNews = async () => {
+        const news = await fetchAsync('https://ensotyres.com/wp/wp-json/api/posts');
+
+        const sel = {
+            template: '.news-page',
+            list: '.news-page-list',
+            date: '.news-page-date',
+            title: '.news-page-title',
+            img: '.news-page-img',
+            txt: '.news-page-content-row',
+        }
+
+        const newsTmpl = document.querySelector(sel.template);
+        const newsListBox = document.querySelector(sel.list);
+        newsListBox.innerHTML = "";
+
+        const articleId = getUrlParam('aid');
+
+        for (let i = 0; i < news.length; i++) {
+            let newsItem = news[i];
+
+            if (articleId && articleId != newsItem.id) {
+                continue
+            }
+
+            newsTmpl.querySelector(sel.date).textContent = newsItem.created;
+            newsTmpl.querySelector(sel.title).textContent = newsItem.title;
+            newsTmpl.querySelector(sel.img).setAttribute('src', newsItem.image);
+            newsTmpl.querySelector(sel.txt).innerHTML = newsItem.body;
+
+            newsListBox.appendChild(newsTmpl.cloneNode(true));
+        }
+
+        document.querySelector('.header').classList.add('transparent');
+    }
+
+    loadNews();
+
+</script>
+
+<style lang="scss" is:global>
+
+    .news-page {
+        display: none;
+    }
+
+    .news-page-list {
+        padding-top: 140px;
+        min-height: 80vh;
+
+        //background-color: var(--clr-light);
+
+        padding-left: 90px;
+        padding-right: 90px;
+
+        @media only screen and (max-width: 1100px) {
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        .news-page {
+            display: block;
+            min-height: 80vh;
+
+            margin-bottom: 20vh;
+
+            .news-page-header-row {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                .news-page-header-box {
+                    width: 33%;
+                    max-width: 390px;
+
+                    .news-page-date {
+                        font-size: 19px;
+                        font-family: BrandonGrotesque;
+                        font-weight: bold;
+                        margin-bottom: 20px;
+                    }
+
+                    .news-page-title {
+                        font-size: 48px;
+                        font-family: BrandonGrotesque;
+                        font-weight: bold;
+                    }
+                }
+
+                .news-page-img-box {
+                    width: 60%;
+                    background-position: center center;
+                    background-size: cover;
+                    position: relative;
+                    padding-top: 35%;
+                    min-height: 550px;
+
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        object-fit: cover;
+                        transition: all 0.9s 0.1s;
+                        height: 100%;
+                        max-width: 100%;
+                    }
+
+                }
+            }
+
+            .news-page-content-row {
+                font-family: BrandonGrotesque;
+                font-size: 20px;
+
+                padding-top: 55px;
+                padding-bottom: 55px;
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+
+    }
+
+</style>

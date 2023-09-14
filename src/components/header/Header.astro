@@ -2,15 +2,21 @@
 import Button from "../button/Button.astro";
 import AButton from "../button/AButton.astro";
 import NavButton from "../button/NavButton.astro";
+
+interface Props {
+    hType?: string;
+}
+
+const {hType = ''} = Astro.props;
 ---
 
-<div class="header">
+<div class={"header " + hType}>
     <div class="header-box">
         <!-- <div class="logo">
             <Logo />
         </div> -->
 
-        <div class="logo">
+        <a href="/enso/" class="logo">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 935.433044 175.748032" fill="currentColor">
                 <g>
                     <path
@@ -38,7 +44,7 @@ import NavButton from "../button/NavButton.astro";
                             d="M116.40139,149.898148H8.652295c-3.4257,0-4.9726,2.190399-4.9726,5.174301v13.800797   c0,2.982895,1.5469,5.167007,4.9726,5.167007H116.40139c3.4272,0,4.974098-2.190903,4.974098-5.174805V155.06514   C121.375488,152.082245,119.82859,149.898148,116.40139,149.898148"></path>
                 </g>
             </svg>
-        </div>
+        </a>
         <!-- <div class="logo
         <svg width="145" height="52" viewBox="0 0 145 52" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect width="145" height="52" fill="url(#pattern0)"></rect>
@@ -59,12 +65,24 @@ import NavButton from "../button/NavButton.astro";
         <!-- <div class="logo">
             <img src="/img/logo.svg" class="filter-green" />
         </div> -->
-        <div class="header-links-box">
-            <NavButton btnType="transparent" goToSel=".slider">ABOUT</NavButton>
-            <NavButton btnType="transparent" goToSel=".video">VIDEO</NavButton>
-            <NavButton btnType="transparent" goToSel=".news-box">NEWS</NavButton>
-            <NavButton btnType="transparent" goToSel=".signup">CONTACT</NavButton>
-        </div>
+
+        {
+            hType ?
+                    <div class="header-links-box">
+                        <NavButton btnType="transparent" targetBlank={false} linkUrl="/enso/" goToSel=".slider">BACK</NavButton>
+                    </div>
+                :
+                    <div class="header-links-box">
+                        <div class="header-links-burger">
+                            <div></div>
+                        </div>
+                        <NavButton btnType="transparent" goToSel=".slider">ABOUT</NavButton>
+                        <NavButton btnType="transparent" goToSel=".video">VIDEO</NavButton>
+                        <NavButton btnType="transparent" goToSel=".news-box">NEWS</NavButton>
+                        <NavButton btnType="transparent" goToSel=".signup">CONTACT</NavButton>
+                    </div>
+        }
+
         <!--
                 <div class="contact-btn-box">
                     <Button>Contact Us</Button>
@@ -74,6 +92,21 @@ import NavButton from "../button/NavButton.astro";
 </div>
 
 <script>
+
+    const initMenu = () => {
+        const menuBox = document.querySelector('.header-links-box');
+        const burgerBtn = document.querySelector('.header-links-burger');
+
+        burgerBtn.addEventListener('click', () => {
+            if (menuBox.classList.contains('play')) {
+                menuBox.classList.remove('play');
+            } else {
+                menuBox.classList.add('play');
+            }
+        });
+    }
+
+    initMenu();
 
 </script>
 
@@ -111,6 +144,8 @@ import NavButton from "../button/NavButton.astro";
             align-items: center;
 
             .logo {
+                display: block;
+
                 svg,
                 img {
                     width: 200px;
@@ -132,6 +167,46 @@ import NavButton from "../button/NavButton.astro";
                 margin-left: 50px;
             }
 
+            .header-links-burger {
+                display: none;
+
+                margin-top: 10px;
+                width: 40px;
+                height: 40px;
+                margin-left: auto;
+                position: relative;
+                cursor: pointer;
+
+                &:before,
+                &:after,
+                > div {
+                    content: "";
+                    position: absolute;
+                    margin: auto;
+                    display: block;
+                    background-color: var(--clr-light);
+                    width: 100%;
+                    height: 5px;
+                    border-radius: 3px;
+                    transform: rotate(0);
+                    transition: all .3s;
+                }
+
+                > div {
+                    top: 0;
+                    bottom: 0;
+                }
+
+                &:before {
+                    top: 0;
+                }
+
+                &:after {
+                    bottom: 0;
+                }
+
+            }
+
             @media only screen and (max-width: 1100px) {
                 margin-left: 25px;
 
@@ -141,7 +216,49 @@ import NavButton from "../button/NavButton.astro";
             }
 
             @media only screen and (max-width: 768px) {
-                display: none;
+
+                top: 0;
+                right: 0;
+                padding: 25px;
+                position: absolute;
+                flex-direction: column;
+
+                //backdrop-filter: blur(10px);
+                //border: 1px solid var(--clr-dark);
+
+                .nbtn {
+                    display: none;
+                }
+
+                .header-links-burger {
+                    display: block;
+                }
+
+                &.play {
+
+                    background-color: rgba(0, 0, 0, .25);
+
+                    .header-links-burger {
+                        > div {
+                            opacity: 0;
+                        }
+
+                        &:before {
+                            top: 17px;
+                            transform: rotate(45deg);
+                        }
+
+                        &:after {
+                            bottom: 18px;
+                            transform: rotate(-45deg);
+                        }
+                    }
+
+                    .nbtn {
+                        display: block;
+                    }
+                }
+
             }
         }
     }
