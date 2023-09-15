@@ -29,13 +29,13 @@ import Button from "../button/Button.astro";
 <script>
 
     const videoBox = document.getElementById('hero-video-box');
-    const videoFrame = document.getElementById('hero-video-frame');
+        const videoFrame = document.getElementById('hero-video-frame');
 
-    videoFrame.onload = function () {
-        setTimeout(() => {
-            videoBox.classList.add('play');
-        }, 1500);
-    };
+        videoFrame.onload = function () {
+            setTimeout(() => {
+                videoBox.classList.add('play');
+                }, 1500);
+            };
 
 </script>
 
@@ -109,24 +109,23 @@ import Button from "../button/Button.astro";
             @media only screen and (max-width: 1100px) {
                 padding-left: 25px;
                 padding-right: 25px;
+                max-width: 660px;
             }
-
-            //@media only screen and (max-width: 600px) {
-            //    padding-left: 20px;
-            //    padding-right: 20px;
-            //}
 
             .hero-title-row {
                 color: var(--clr-lightest);
-                font-size: 51px;
                 font-weight: bold;
                 line-height: 1.4;
                 padding-bottom: 10px;
+
+                font-size: 51px;
+                font-size: min(8vw, 51px);
             }
 
             .hero-txt-row {
                 color: var(--clr-lightest);
                 font-size: 30px;
+                font-size: min(6vw, 30px);
             }
 
             .hero-btn-row {
@@ -148,6 +147,11 @@ import Button from "../button/Button.astro";
             bottom: 40px;
             width: 60px;
             height: 100px;
+
+            @media only screen and (max-width: 1100px) {
+                right: 25px;
+                bottom: 25px;
+            }
         }
     }
 

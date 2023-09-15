@@ -96,6 +96,7 @@ const {hType = ''} = Astro.props;
     const initMenu = () => {
         const menuBox = document.querySelector('.header-links-box');
         const burgerBtn = document.querySelector('.header-links-burger');
+        const navBtns = menuBox.querySelectorAll('.nbtn');
 
         burgerBtn.addEventListener('click', () => {
             if (menuBox.classList.contains('play')) {
@@ -103,6 +104,13 @@ const {hType = ''} = Astro.props;
             } else {
                 menuBox.classList.add('play');
             }
+        });
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (menuBox.classList.contains('play'))
+                    menuBox.classList.remove('play');
+            });
         });
     }
 
@@ -235,8 +243,11 @@ const {hType = ''} = Astro.props;
                 }
 
                 &.play {
-
-                    background-color: rgba(0, 0, 0, .25);
+                    background-color: rgba(0, 0, 0, 1);
+                    width: 100%;
+                    height: 100vh;
+                    overflow: hidden;
+                    align-items: center;
 
                     .header-links-burger {
                         > div {
@@ -255,7 +266,9 @@ const {hType = ''} = Astro.props;
                     }
 
                     .nbtn {
+                        margin-top: 20px;
                         display: block;
+                        font-size: 40px;
                     }
                 }
 
