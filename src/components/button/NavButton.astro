@@ -32,11 +32,12 @@ const {btnType = 'black', linkUrl, clickCallback, uid, goToSel, targetBlank = tr
             const aBtn = this.querySelector('div.nbtn');
             const goToSelector = this.dataset.gotosel;
 
-            aBtn.addEventListener('click', () => {
-                if (goToSelector) {
-                    goTo(goToSelector);
-                }
-            });
+            if (aBtn)
+                aBtn.addEventListener('click', () => {
+                    if (goToSelector) {
+                        goTo(goToSelector);
+                    }
+                });
         }
     }
 

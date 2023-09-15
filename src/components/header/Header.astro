@@ -83,13 +83,14 @@ const {hType = ''} = Astro.props;
         const burgerBtn = document.querySelector('.header-links-burger');
         const navBtns = menuBox.querySelectorAll('.nbtn');
 
-        burgerBtn.addEventListener('click', () => {
-            if (menuBox.classList.contains('play')) {
-                menuBox.classList.remove('play');
-            } else {
-                menuBox.classList.add('play');
-            }
-        });
+        if (burgerBtn)
+            burgerBtn.addEventListener('click', () => {
+                if (menuBox.classList.contains('play')) {
+                    menuBox.classList.remove('play');
+                } else {
+                    menuBox.classList.add('play');
+                }
+            });
 
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
