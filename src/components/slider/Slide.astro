@@ -1,14 +1,16 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
     title: string;
     txt: string;
     // color?: string;
     // bgColor?: string;
-    imgUrl?: string;
+    img?: ImageMetadata;
+    altText?: string;
 }
 
-const {title, txt, color = 'black', bgColor = 'white', imgUrl} = Astro.props;
-const wrImgUrl = `url(${imgUrl})`;
+const {title, txt, color = 'black', bgColor = 'white', img, altText} = Astro.props;
 ---
 
 <!--<div class="slide-wr" style={`color: ${color};background-color: ${bgColor}`}>-->
@@ -22,7 +24,7 @@ const wrImgUrl = `url(${imgUrl})`;
             </div>
         </div>
         <div class="slide-img-box">
-            <img src={imgUrl}/>
+            <Image src={img} alt={altText}/>
         </div>
     </div>
 </div>

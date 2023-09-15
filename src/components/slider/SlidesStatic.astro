@@ -1,5 +1,7 @@
 ---
 import Slide from "./Slide.astro";
+import tireImage from '../../../public/img/Tire2-cut.png'
+import impactWipImage from '../../../public/img/Impact-WIP-cut.png'
 ---
 
 
@@ -8,7 +10,9 @@ import Slide from "./Slide.astro";
         <!--TODO: BASE_URL-->
         <Slide
                 title="ABOUT ENSO"
-                imgUrl={"/img/Tire2-cut.png"}>
+                txt=""
+                img={tireImage}
+                altText="An image of a tire."
             <p>
                 All tires wear down, creating air pollution. Most tires are also inefficient, limiting range.
             </p>
@@ -19,7 +23,9 @@ import Slide from "./Slide.astro";
         <!--TODO: BASE_URL-->
         <Slide
                 title="WHAT IS TIRE POLLUTION?"
-                imgUrl={"/img/Impact-WIP-cut1.png"}>
+                txt=""
+                img={impactWipImage}
+                altText="An image of tire dust."
             <p>
                 No tire lasts forever. Every time a tire accelerates, brakes or turns, it wears down, emitting thousands of tiny particles into our air.
             </p>

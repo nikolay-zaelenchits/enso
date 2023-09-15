@@ -1,7 +1,7 @@
-<div class="video" id="video-player-wr">
+<div class="video" id="video-player-wr" data-src="/img/video-bg-new.png">
     <div id="video-player-box" class="player-box hidden">
 
-        <video id="video-player" class="player" poster="/img/video-bg.png">
+        <video id="video-player" class="player">
             <!--TODO: BASE_URL-->
             <!--<source src="/enso/video/ENSO-CorporateVideo.mp4" type="video/mp4">-->
             <source src="/video/ENSO-CorporateVideo.mp4" type="video/mp4">
@@ -21,7 +21,7 @@
 
     const initVideo = () => {
         const videoPlayerBox = document.getElementById('video-player-box');
-        const videoPlayer = document.getElementById('video-player');
+        const videoPlayer = document.getElementById('video-player') as HTMLVideoElement;
         const playBtn = document.getElementById('video-play-cta');
         const closeBtn = document.getElementById('video-close-cta');
 
@@ -51,7 +51,21 @@
 
     const videoContainer = document.getElementById("video-player-wr");
     const playButton = document.getElementById("video-play-cta");
-    const video = document.getElementById("video-player");
+
+    const lazyLoadImage = () => {
+        const backgroundImagePath = videoContainer.getAttribute("data-src");
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    videoContainer.style.backgroundImage = `url(${backgroundImagePath})`;
+                    observer.unobserve(videoContainer);
+                }
+            });
+        });
+        observer.observe(videoContainer);
+    };
+    
+    lazyLoadImage();
 
     videoContainer.addEventListener("mousemove", function (event) {
         const containerRect = videoContainer.getBoundingClientRect();
@@ -91,7 +105,6 @@
         height: 80vh;
         min-height: 440px;
 
-        background-image: url("/img/video-bg-new.png");
         background-position: center center;
         background-size: cover;
 
