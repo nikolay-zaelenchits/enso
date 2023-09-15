@@ -10,7 +10,7 @@ interface Props {
     altText?: string;
 }
 
-const {title, txt, color = 'black', bgColor = 'white', img, altText} = Astro.props;
+const {title, txt = 'black', img, altText} = Astro.props;
 ---
 
 <!--<div class="slide-wr" style={`color: ${color};background-color: ${bgColor}`}>-->
