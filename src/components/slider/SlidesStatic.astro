@@ -127,9 +127,11 @@ import impactWipImage from '../../../public/img/Impact-WIP-cut.png'
 
         const slidesBtns = slider.querySelectorAll(sliderControlsSel);
         slidesBtns.forEach(btn => btn.addEventListener('click', (event: Event) => {
+            if (event.target instanceof HTMLElement) {
             event.stopPropagation();
-            const idx = event.target.dataset.idx;
+            const idx: number = +event.target.dataset.idx;
             sliderPlay(idx);
+            }
         }));
 
         slider.addEventListener("click", () => {

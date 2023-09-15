@@ -95,8 +95,10 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
         newsListBox.querySelectorAll('.news-item').forEach(node => node.addEventListener(
             "mouseenter",
             (event: MouseEvent) => {
-                let idx = event.target.dataset.idx;
-                newsSelect(idx);
+                if (event.target instanceof HTMLElement) {
+                    let idx: number = +event.target.dataset.idx;
+                    newsSelect(idx);
+                }
             },
             false,
         ));

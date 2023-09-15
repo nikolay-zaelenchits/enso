@@ -97,8 +97,10 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
         taxiListBox.querySelectorAll('.taxi-item').forEach(node => node.addEventListener(
             "mouseenter",
             (event: MouseEvent) => {
-                let idx = event.target.dataset.idx;
-                taxiSelect(idx);
+                if (event.target instanceof HTMLElement) {
+                    let idx: number = +event.target.dataset.idx;
+                    taxiSelect(idx);
+                }
             },
             false,
         ));

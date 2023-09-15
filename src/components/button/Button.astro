@@ -3,6 +3,7 @@ interface Props {
     btnType?: 'white' | 'transparent';
     linkUrl?: string;
     click?: () => {}
+    targetBlank?: boolean
 }
 
 const {btnType = 'black', linkUrl, click} = Astro.props;
