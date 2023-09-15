@@ -240,6 +240,9 @@ const {hType = ''} = Astro.props;
 
                 .header-links-burger {
                     display: block;
+                    position: absolute;
+                    top: 25px;
+                    right: 25px;
                 }
 
                 &.play {
@@ -248,6 +251,7 @@ const {hType = ''} = Astro.props;
                     height: 100vh;
                     overflow: hidden;
                     align-items: center;
+                    justify-content: center;
 
                     .header-links-burger {
                         > div {
@@ -266,7 +270,8 @@ const {hType = ''} = Astro.props;
                     }
 
                     .nbtn {
-                        margin-top: 20px;
+                        margin-top: 15px;
+                        margin-bottom: 15px;
                         display: block;
                         font-size: 40px;
                     }
