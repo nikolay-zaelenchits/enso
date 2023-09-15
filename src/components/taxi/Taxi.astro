@@ -1,6 +1,10 @@
 ---
 import Button from "../button/Button.astro";
 import IconArrowShort from "../icons/IconArrowShort.astro";
+import { Image } from 'astro:assets';
+import taxi1 from  "../../../public/img/taxi1.png"
+import taxi2 from  "../../../public/img/taxi2.png"
+import taxi3 from  "../../../public/img/taxi3.png"
 ---
 
 <div class="taxi-wr">
@@ -34,9 +38,9 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                 </div>
             </div>
             <div id="taxi-img-box" class="taxi-img-box">
-                <div class="taxi-img taxi-img-1"></div>
-                <div class="taxi-img taxi-img-2"></div>
-                <div class="taxi-img taxi-img-3"></div>
+                <Image src={taxi1} alt="Image of a taxi" class="taxi-img taxi-img-1" loading="lazy"/>
+                <Image src={taxi2} alt="Image of a taxi wheel" class="taxi-img taxi-img-2" loading="lazy"/>
+                <Image src={taxi3} alt="Closeup of a taxi wheel" class="taxi-img taxi-img-3" loading="lazy"/>
                 <!--<div class="taxi-img taxi-img-4"></div>-->
             </div>
         </div>
@@ -288,6 +292,9 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                         top: -$offset;
                         bottom: $offset;
 
+                        height: 100%;
+                        width: auto;
+
                         left: 0;
                         right: 0;
 
@@ -304,19 +311,6 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                             left: 0;
                             right: 0;
                         }
-
-                        &.taxi-img-1 {
-                            background-image: url("/img/taxi1.png");
-                        }
-
-                        &.taxi-img-2 {
-                            background-image: url("/img/taxi2.png");
-                        }
-
-                        &.taxi-img-3 {
-                            background-image: url("/img/taxi3.png");
-                        }
-
                     }
                 }
             }

@@ -12,7 +12,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
         <div class="news-page-img-box">
             <!--<img class="news-page-img" src="/enso/img/news1.jpg"/>-->
             <!--TODO: BASE_URL-->
-            <img class="news-page-img" src="/img/news1.jpg" loading="lazy"/>
+            <img class="news-page-img"/>
         </div>
     </div>
     <div class="news-page-content-row">
@@ -70,6 +70,10 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
             newsTmpl.querySelector(sel.date).textContent = newsItem.created;
             newsTmpl.querySelector(sel.title).textContent = newsItem.title;
             newsTmpl.querySelector(sel.img).setAttribute('src', newsItem.image);
+            // only lazy load images after index 0
+            if (i !== 0) {
+                newsTmpl.querySelector(sel.img).setAttribute('loading', "lazy");
+            }
             newsTmpl.querySelector(sel.txt).innerHTML = newsItem.body;
 
             newsListBox.appendChild(newsTmpl.cloneNode(true));
