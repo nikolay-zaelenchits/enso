@@ -123,7 +123,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
     }
 
     const loadNews = async () => {
-        const news = await fetchAsync('https://ensotyres.com/wp/wp-json/api/posts');
+        const news = await fetchAsync('https://www.ensotyres.com/wp/wp-json/api/posts');
         const newsListBox = document.getElementById('news-list');
         const newsImgBox = document.getElementById('news-img-box');
 
