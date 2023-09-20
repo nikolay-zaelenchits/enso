@@ -43,7 +43,7 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
         return null;
     }
     const loadNews = async () => {
-        const news = await fetchAsync('https://ensotyres.com/wp/wp-json/api/posts');
+        const news = await fetchAsync('https://www.ensotyres.com/wp/wp-json/api/posts');
 
         const sel = {
             template: '.news-page',
