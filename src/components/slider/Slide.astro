@@ -2,17 +2,18 @@
 interface Props {
     title: string;
     txt: string;
+    cls?: string;
     // color?: string;
     // bgColor?: string;
     imgUrl?: string;
 }
 
-const {title, txt, color = 'black', bgColor = 'white', imgUrl} = Astro.props;
+const {title, txt, color = 'black', bgColor = 'white', imgUrl,cls} = Astro.props;
 const wrImgUrl = `url(${imgUrl})`;
 ---
 
 <!--<div class="slide-wr" style={`color: ${color};background-color: ${bgColor}`}>-->
-<div class="slide-wr">
+<div class={"slide-wr " + cls}>
     <div class="slide">
         <div class="slide-txt-box">
             <div class="slide-title">{title}</div>
