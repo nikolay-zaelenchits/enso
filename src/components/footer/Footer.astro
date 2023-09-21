@@ -7,13 +7,13 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
     <div class="footer-left">
         <div class="footer-nav">
             <div>
-                <AButton uid="btn-about" btnType="black" goToSel=".slider">ABOUT</AButton>
+                <AButton uid="btn-about" btnType="black" goToSel=".slide-about">ABOUT</AButton>
             </div>
             <div>
                 <AButton btnType="black" goToSel=".taxi-box">TAXI</AButton>
             </div>
             <div>
-                <AButton uid="btn-impact" btnType="black" goToSel=".slider">IMPACT</AButton>
+                <AButton uid="btn-impact" btnType="black" goToSel=".slide-impact">IMPACT</AButton>
             </div>
             <div>
                 <AButton btnType="black" goToSel=".bcorp-wr">B CORP</AButton>
@@ -105,6 +105,12 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
 
         display: flex;
         justify-content: space-between;
+
+        &,
+        & * {
+            transition: all .3s;
+        }
+
 
         .footer-left,
         .footer-mid,
