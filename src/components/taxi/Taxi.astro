@@ -49,6 +49,14 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
             </div>
         </div>
     </div>
+
+    <div class="taxi-mobile-btn-row">
+        <Button linkUrl="http://enso.london/">Book now
+            <IconArrowShort/>
+        </Button>
+    </div>
+
+
 </div>
 
 <script>
@@ -398,6 +406,15 @@ import IconArrowShort from "../icons/IconArrowShort.astro";
                     }
                 }
             }
+        }
+
+        .taxi-mobile-btn-row {
+            display: none;
+            @media only screen and (max-width: 1000px) {
+                display: flex;
+            }
+
+            padding-bottom: 25px;
         }
     }
 </style>
